@@ -1,14 +1,18 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Navbar from "../components/NavBar"
+import SearchBar from "../components/SearchBar"
 export default function Home(){
     const navigate = useNavigate()
     const [user,setUser] = useState({name:"",surname:"",email:"",password:""})
+    const [movieTitle,setMovieTitle] = useState("")
+    const [movies,setMovies] = useState([{}])
+    
     return(
         <>
             <Navbar user={user} setUser={setUser}></Navbar>
-            <h1>Benvenuto nella tua home</h1>
-            <a onClick={()=>navigate("/area_personale")}>area personale</a>
+            <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle} movies={movies} setMovies={setMovies}/>
+            
         </>
     )
 }

@@ -12,6 +12,7 @@ export default function SearchBar({movieTitle,setMovieTitle,movies,setMovies}) {
             res.data
             console.log(res.data.results)
             setMovies(res.data.results)
+            setMovieTitle("")
         })
         .catch(err => {
             console.log(err)
@@ -19,14 +20,16 @@ export default function SearchBar({movieTitle,setMovieTitle,movies,setMovies}) {
     }
 
     return (
-        <div>
+        <div className="flex flex-row p-5 justify-center gap-2">
             <input 
             type="text"
             placeholder="Cerca un film..."
             value={movieTitle}
             onChange={(e) => setMovieTitle(e.target.value)}
-            />
-            <button onClick={handleSubmit}>Cerca</button>
+            className=" px-3 my-2 outline-1 outline-gray-500 rounded-3xl"/>
+            <button 
+            onClick={handleSubmit}
+            className=" px-3 py-1 my-2 outline-1 outline-gray-500 rounded-3xl focus:scale-110 focus:bg-gray-200  transition ease-in-out duration-200 ">Cerca</button>
         </div>
     )
 }
