@@ -20,7 +20,7 @@ export default function SearchBar({movieTitle,setMovieTitle,movies,setMovies}) {
     }
 
     return (
-        <div className="flex flex-row p-5 justify-center gap-2">
+        <div className="flex flex-row p-5 pb-3 mb-3 justify-center gap-2 border-b-2 border-gray-300">
             <input 
             type="text"
             placeholder="Cerca un film..."
