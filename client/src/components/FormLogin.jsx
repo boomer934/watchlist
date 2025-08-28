@@ -13,6 +13,7 @@ export default function FormLogin({ user, setUser }) {
         navigate('/home')
       }
     } catch (error) {
+      alert(error.response.data.message)
       console.error(error)
     }
     setUser({ email: "", password: "" })
