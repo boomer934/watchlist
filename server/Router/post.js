@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const express = require('express')
 const  {executeQuery}  = require('../db')
 const jwt = require('jsonwebtoken')
+const verifyToken = require('../middlewares/middleware')
 
 const router = express.Router()
 
@@ -61,5 +62,15 @@ router.post("/login", async (req, res) => {
         });
     }
 });
+
+router.post("/watchlist", verifyToken, async(req,res)=>{
+    const {original_title,vote_average} = req.body
+    const {id} = req.user
+    const checkFilm = await executeQuery("SELECT title FROM Watchlist WHERE user_id = ? AND title = ?",[id,original_title])
+    if(checkFilm.length > 0) return res.status(400).json({"message":"film gia presente nella watchlist"})
+    const query = "INSERT INTO Watchlist(user_id,title,rating) VALUES (?,?,?)"
+    const response = await executeQuery(query,[id,original_title,vote_average])
+    if(response) return res.json({"message":"film aggiunto alla watchlist"})
+})
 
 module.exports = router
