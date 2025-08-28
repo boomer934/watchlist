@@ -65,7 +65,7 @@ export default function RegisterForm({ user, setUser }) {
         />
         <input
           type="submit"
-          value="Sign Up"
+          value="Sign Up →"
           className="bg-red-500 w-full h-8 cursor-pointer text-white font-semibold mt-5 self-center rounded-3xl focus:scale-110 focus:bg-red-600 focus:transition duration-300 ease-in-out"
         />
       </form>
