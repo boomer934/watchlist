@@ -1,10 +1,13 @@
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 export default function RegisterForm({ user, setUser }) {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post("http://localhost:5000/register", user);
       setUser({ name: "", surname: "", email: "", password: "" });
+      navigate("/login");
     } catch (error) {
       console.error(error);
     }
