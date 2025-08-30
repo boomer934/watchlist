@@ -4,13 +4,14 @@ import SearchBar from "../components/SearchBar"
 import Card from "../components/Card"
 import Filter from "../components/Filter"
 import axios from "axios"
-import { UserContext, MovieTitleContext, MoviesContext } from "../App"
+import { UserContext, MovieTitleContext, MoviesContext,OpenStateContext } from "../App"
 
 
 export default function Home(){
     const {user,setUser} = useContext(UserContext)
     const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
     const {movies,setMovies} = useContext(MoviesContext)
+    const {isOpenState,setIsOpenState} = useContext(OpenStateContext)
     const [filterBy,setFilterBy] = useState("")
     
     useEffect(()=>{
@@ -48,7 +49,15 @@ export default function Home(){
             <Navbar user={user} setUser={setUser}></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
-            {movies && movies.map((movie,index)=>(<Card movie={movie} key={index}></Card>))}
+            {movies && !isOpenState ? (
+                movies.map((movie,index)=>(
+                <Card movie={movie} key={index}></Card>
+                )
+            )):(
+                movies.map((movie,index)=>(
+                <Card movie={movie} key={index}></Card>
+            )))
+            }
         </>
     )
 }

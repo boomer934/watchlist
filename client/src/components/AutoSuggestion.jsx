@@ -1,15 +1,16 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { MovieTitleContext, MoviesContext, MovieContext } from "../App"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 export default function AutoSuggestion({isOpenState,setIsOpenState}){
-    const {movies,setMovies} = useContext(MoviesContext)
     const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
-    const {movie,setMovie} = useContext(MoviesContext)
+    const {movie,setMovie} = useContext(MovieContext)
+    const [moviesSuggestion,setMoviesSuggestion] = useState([{}])
     const navigate = useNavigate()
 
-    const handleClick = (movie) =>{
-        setMovie(movie)
+    const handleClick = (singleMovie) =>{
+        setMovie(singleMovie)
+        setIsOpenState(false)
         navigate("/home/search/movie",{state:{movie:movie}})
     }
 
@@ -21,7 +22,7 @@ export default function AutoSuggestion({isOpenState,setIsOpenState}){
                     query: movieTitle
                 }
             })
-            .then(res=>setMovies(res.data.results))
+            .then(res=>setMoviesSuggestion(res.data.results))
         } catch (error) {
             console.error(error.response.data.message)
         }
@@ -30,13 +31,13 @@ export default function AutoSuggestion({isOpenState,setIsOpenState}){
     
     return(
         <div className="flex justify-center">
-            {isOpenState && movieTitle && movies ? (
+            {isOpenState && movieTitle && moviesSuggestion ? (
                 <div className=" absolute h-[224px] w-[180px]   top-[145px] rounded-xl p-4 overflow-y-scroll bg-gray-400 shadow-md">
                     <ul className=" flex flex-col gap-2 justify-start">
-                        {movies.filter((movie)=> movie.poster_path !== null && movie.release_date !== null).map((movie,index)=>(
+                        {moviesSuggestion.filter((movie)=> movie.poster_path !== null && movie.release_date !== null).map((movie,index)=>(
                             <li 
                             key={index}
-                            onClick={handleClick(movie)} 
+                            onClick={(singleMovie)=>handleClick(singleMovie)} 
                             className="flex flex-row gap-1">
                                 <img 
                                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}` }
