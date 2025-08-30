@@ -23,10 +23,12 @@ export default function Navbar({user,setUser}){
                     </div>
                     { user.name && user.surname && user.email ?(
                         <>
-                        <div className=" flex flex-row">
+                        <div className=" flex flex-row focus:scale-120 cursor-pointer transform duration-200 ease-linear">
                             <p 
                             className="pr-1.5 bg-red-500 p-1.5 rounded-xl"
-                            onClick={()=>setIsOpen((prev)=>!prev)}>Benvenuto {user.name} {user.surname}</p>
+                            onClick={()=>setIsOpen((prev)=>!prev)}>
+                                Benvenuto {user.name} {user.surname}
+                            </p>
                         </div>
                         </>
                     ):(
