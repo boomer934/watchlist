@@ -1,10 +1,12 @@
 import { useContext } from "react"
-import { UserContext } from "../App"
+import { UserContext,AddContext } from "../App"
 import { useLocation } from "react-router-dom"
 import Navbar from "./NavBar"
+import { handleClick } from "../helper/handlers"
 
 export default function CardDetails(){
 
+    const {add,setAdd} = useContext(AddContext)
     const {user,setUser} = useContext(UserContext)
     const movie = useLocation().state?.movie
 
@@ -23,9 +25,7 @@ export default function CardDetails(){
                             <img 
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} 
                             className="z-10 w-[100px] h-[150px] ml-8"/>
-                            <h1 className=" z-10 m-3 place-self-start text-2xl">
-                                {movie.title}
-                            </h1>
+                            <button onClick={(e)=>handleClick(movie,setAdd)}>aggiungi alla watchlist</button>
                         </div>
                         
                     </div>
