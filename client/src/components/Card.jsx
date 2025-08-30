@@ -1,42 +1,11 @@
-import axios from "axios"
+import { handleClick , handleRedirect } from "../helper/handlers"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 export default function Card({movie}){
     const [add, setAdd] = useState("Aggiungi")
     const navigate = useNavigate()
-    const handleRedirect = (movie) =>{
-        try {
-            axios.get(`https://api.themoviedb.org/3/movie/${movie.id}`,{
-                params: {
-                    api_key: "ae7e3d3ba153dd817538a94cd60ac92e",
-                },
-                headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
-            })
-            .then(res=>navigate(`/home/search/movie`,{state:{movie:res.data}}))
-            }catch (error) {
-                console.error(error.response.data.message)
-            }
-         
-    }
+    
 
-    const handleClick = async () => {
-    const token = localStorage.getItem("token");
-    try {
-        const res = await axios.post(
-        "http://localhost:5000/watchlist",
-        movie,
-        { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        setAdd("Aggiunto");
-    } catch (error) {
-        if (error.response && error.response.status === 400) {
-            setAdd("Già in watchlist");
-        } else {
-            console.error("Errore durante l'aggiunta:", error);
-        }
-    }
-    };
     useEffect(()=>{
         if (add === "Aggiunto"  || add === "Già in watchlist") {
             setTimeout(() => {
@@ -50,7 +19,7 @@ export default function Card({movie}){
         {movie && movie.poster_path !== undefined && movie.poster_path !== null ? (
             <div 
             className="flex flex-row justify-start p-3 m-3 gap-4 h-[224px] rounded-md bg-gray-400/50 "
-            onClick={()=>handleRedirect(movie)}>
+            onClick={()=>handleRedirect(movie,navigate)}>
                <img 
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} 
                     alt={movie.original_title} 
@@ -63,7 +32,7 @@ export default function Card({movie}){
                     onClick={
                         (e) => {
                             e.stopPropagation()
-                            handleClick()
+                            handleClick(movie,setAdd)
                         }
                     }
                     >
