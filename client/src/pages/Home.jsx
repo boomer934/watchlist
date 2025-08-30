@@ -6,6 +6,7 @@ import Filter from "../components/Filter"
 import axios from "axios"
 import { UserContext, MovieTitleContext, MoviesContext } from "../App"
 
+
 export default function Home(){
     const {user,setUser} = useContext(UserContext)
     const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
@@ -47,7 +48,7 @@ export default function Home(){
             <Navbar user={user} setUser={setUser}></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
-            {movies && movies.filter((movie)=>(movie.poster_path !== null || movie.poster_path !== undefined)).map((movie,index)=>(<Card movie={movie} key={index}></Card>))}
+            {movies && movies.map((movie,index)=>(<Card movie={movie} key={index}></Card>))}
         </>
     )
 }

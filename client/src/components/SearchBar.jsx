@@ -1,6 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
-export default function SearchBar({movieTitle,setMovieTitle}) {
+import { useContext, useEffect } from "react"
+import { OpenStateContext } from "../App"
+import AutoSuggestion from "./AutoSuggestion"
+
+export default function SearchBar({movieTitle,setMovieTitle}){
+    const {isOpenState,setIsOpenState} = useContext(OpenStateContext)
     const navigate = useNavigate()
     const handleSubmit = () => {
         const res = axios.get("https://api.themoviedb.org/3/search/movie", {
@@ -14,6 +19,7 @@ export default function SearchBar({movieTitle,setMovieTitle}) {
             console.log(res.data.results)
             const movies = res.data.results
             setMovieTitle("")
+            setIsOpenState(false)
             navigate("/home/search",{state:{movies:movies}})
         })
         .catch(err => {
@@ -21,22 +27,29 @@ export default function SearchBar({movieTitle,setMovieTitle}) {
         })
     }
 
+    useEffect(()=>{
+        setIsOpenState(true)
+    },[movieTitle])
+
     return (
-        <div className="flex flex-row p-5 pb-3 mb-3 justify-center gap-2 border-b-2 border-gray-400">
-            <input 
-            type="text"
-            placeholder="Cerca un film..."
-            value={movieTitle}
-            onChange={(e) => setMovieTitle(e.target.value)}
-            onKeyDown={(e)=>{
-                if(e.key === "Enter"){
-                    handleSubmit()
-                }
-            }}
-            className=" px-3 my-2 outline-1 outline-gray-500 rounded-3xl  placeholder:text-black" />
-            <button 
-            onClick={handleSubmit}
-            className=" px-3 py-1 my-2 outline-1 outline-gray-500 rounded-3xl focus:scale-110 focus:bg-gray-200  transition ease-in-out duration-200 ">Cerca</button>
-        </div>
+        <>
+            <div className="flex flex-row p-5 pb-3 mb-3 justify-center gap-2 border-b-2 border-gray-400">
+                <input 
+                type="text"
+                placeholder="Cerca un film..."
+                value={movieTitle}
+                onChange={(e) => setMovieTitle(e.target.value)}
+                onKeyDown={(e)=>{
+                    if(e.key === "Enter"){
+                        handleSubmit()
+                    }
+                }}
+                className=" px-3 my-2 outline-1 outline-gray-500 rounded-3xl  placeholder:text-black" />
+                <button 
+                onClick={handleSubmit}
+                className=" px-3 py-1 my-2 outline-1 outline-gray-500 rounded-3xl focus:scale-110 focus:bg-gray-200  transition ease-in-out duration-200 ">Cerca</button>
+            </div>
+            <AutoSuggestion isOpenState={isOpenState} setIsOpenState={setIsOpenState}/>
+        </>
     )
 }
