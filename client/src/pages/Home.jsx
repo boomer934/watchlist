@@ -13,7 +13,7 @@ export default function Home(){
         <>
             <Navbar user={user} setUser={setUser}></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle} movies={movies} setMovies={setMovies}/>
-            {movies && movies.map((movie,index)=><Card key={index} movie={movies[index]}/>)}
+            {movies && movies.filter((movie)=>(movie.poster_path !== null)).map((movie)=>(<Card movie={movie} key={movie.id}></Card>))}
         </>
     )
 }

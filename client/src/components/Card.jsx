@@ -11,7 +11,6 @@ export default function Card({movie}){
         { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        // Se arrivi qui, il POST ha avuto successo
         setAdd("Aggiunto");
     } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -28,6 +27,7 @@ export default function Card({movie}){
             }, 3000);
         }
     },[add])
+    
     return(
         <>
         {movie ? (
