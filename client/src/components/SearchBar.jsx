@@ -1,6 +1,7 @@
-import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
-export default function SearchBar({movieTitle,setMovieTitle,movies,setMovies}) {
+export default function SearchBar({movieTitle,setMovieTitle}) {
+    const navigate = useNavigate()
     const handleSubmit = () => {
         const res = axios.get("https://api.themoviedb.org/3/search/movie", {
             params: {
@@ -11,8 +12,9 @@ export default function SearchBar({movieTitle,setMovieTitle,movies,setMovies}) {
         .then(res => {
             res.data
             console.log(res.data.results)
-            setMovies(res.data.results)
+            const movies = res.data.results
             setMovieTitle("")
+            navigate("/home/search",{state:{movies:movies}})
         })
         .catch(err => {
             console.log(err)
@@ -26,6 +28,11 @@ export default function SearchBar({movieTitle,setMovieTitle,movies,setMovies}) {
             placeholder="Cerca un film..."
             value={movieTitle}
             onChange={(e) => setMovieTitle(e.target.value)}
+            onKeyDown={(e)=>{
+                if(e.key === "Enter"){
+                    handleSubmit()
+                }
+            }}
             className=" px-3 my-2 outline-1 outline-gray-500 rounded-3xl  placeholder:text-black" />
             <button 
             onClick={handleSubmit}
