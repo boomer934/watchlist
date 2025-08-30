@@ -5,7 +5,18 @@ export default function Card({movie}){
     const [add, setAdd] = useState("Aggiungi")
     const navigate = useNavigate()
     const handleRedirect = (movie) =>{
-        navigate("/home/search/movie",{state:{movie:movie}})
+        try {
+            axios.get(`https://api.themoviedb.org/3/movie/${movie.id}`,{
+                params: {
+                    api_key: "ae7e3d3ba153dd817538a94cd60ac92e",
+                },
+                headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
+            })
+            .then(res=>navigate(`/home/search/movie`,{state:{movie:res.data}}))
+            }catch (error) {
+                console.error(error.response.data.message)
+            }
+         
     }
 
     const handleClick = async () => {
@@ -48,7 +59,7 @@ export default function Card({movie}){
                 <div className="flex flex-row gap-2 items-center">
                     <h2 className="font-bold">{movie.title}</h2>
                     <button 
-                    className="bg-gray-400/50 focus:bg-gray-400/70 focus:scale-110 p-1 rounded-md min-h-[32px] transition ease-in-out duration-100 z-10"
+                    className="bg-gray-400/50 focus:bg-gray-400/70 focus:scale-110 p-1 rounded-md min-h-[32px] transition ease-in-out duration-100"
                     onClick={
                         (e) => {
                             e.stopPropagation()

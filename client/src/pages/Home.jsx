@@ -12,7 +12,7 @@ export default function Home(){
     const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
     const {movies,setMovies} = useContext(MoviesContext)
     const {isOpenState,setIsOpenState} = useContext(OpenStateContext)
-    const [filterBy,setFilterBy] = useState("")
+    const [filterBy,setFilterBy] = useState("popular")
     
     useEffect(()=>{
         try {
