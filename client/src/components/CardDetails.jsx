@@ -5,6 +5,7 @@ import Navbar from "./NavBar"
 import { handleClick, getWatchProviders } from "../helper/handlers"
 import { useQuery } from "@tanstack/react-query"
 import { redirectToProvider } from "../helper/handlers"
+import Footer from "./Footer"
 
 export default function CardDetails(){
     
@@ -116,6 +117,7 @@ export default function CardDetails(){
                                 }
                             </div>
                         </div>
+                        <Footer/>
                     </div>
                 </>
             ):(
