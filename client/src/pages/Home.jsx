@@ -5,59 +5,40 @@ import Card from "../components/Card"
 import Filter from "../components/Filter"
 import axios from "axios"
 import { UserContext, MovieTitleContext, MoviesContext,OpenStateContext } from "../App"
-
+import { useQuery } from "@tanstack/react-query"
+import { getMovies } from "../helper/handlers"
 
 export default function Home(){
     const {user,setUser} = useContext(UserContext)
-    const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
     const {movies,setMovies} = useContext(MoviesContext)
-    const {isOpenState,setIsOpenState} = useContext(OpenStateContext)
+    const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
     const [filterBy,setFilterBy] = useState("popular")
     
-    useEffect(()=>{
-        try {
-            axios.get("https://api.themoviedb.org/3/movie/popular?language=en",{
-                params: { api_key: "ae7e3d3ba153dd817538a94cd60ac92e" }
-            })
-            .then(res=>setMovies(res.data.results))
-            .catch(err=>console.log(err))
-        } catch (error){
-            console.log(error)
-        }
-        
-    },[])
+    
+    const{
+        data:queryMovies,
+        error,
+        status
+    }=useQuery({
+        queryKey:["AllMovies",filterBy],
+        queryFn:()=>getMovies(filterBy),
+        refetchOnWindowFocus:false,
+    })
 
-    useEffect(()=>{
-        try {
-            axios.get(`https://api.themoviedb.org/3/movie/${filterBy}?language=en-US`,{
-                params: { api_key: "ae7e3d3ba153dd817538a94cd60ac92e" }
-            })
-            .then(res=>{
-                if(res.data.results){
-                    setMovies(res.data.results)
-                }else{
-                    setMovies([res.data])
-                }
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    },[filterBy])
+      useEffect(() => {
+            if (queryMovies) {
+            setMovies(queryMovies);
+            }
+        }, [queryMovies]);
 
     return(
         <>
             <Navbar user={user} setUser={setUser}></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
-            {movies && !isOpenState ? (
-                movies.map((movie,index)=>(
-                <Card movie={movie} key={index}></Card>
-                )
-            )):(
-                movies.map((movie,index)=>(
-                <Card movie={movie} key={index}></Card>
-            )))
-            }
+            {movies?.map((movie) => (
+                <Card movie={movie} key={movie.id} />
+            ))}
         </>
     )
 }

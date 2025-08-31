@@ -51,7 +51,9 @@ export default function Card({movie}){
                 </div>
             </div>
         ):(
-            <></>
+            <div className=" h-[224px] bg-gray-400/50 p-3 m-3 rounded-md flex justify-center items-center">
+                <div className="w-16 h-16 border-b-2 border-black animate-spin rounded-full"></div>
+            </div>
         )}
             
         </>

@@ -21,7 +21,7 @@ export default function Navbar({user,setUser}){
                     <div className="flex-shrink-0">
                         <h1 className="text-[21px] font-bold tracking-wide text-red-500 pr-1.5">WATCHLIST</h1>
                     </div>
-                    { user.name && user.surname && user.email ?(
+                    { user?.name && user?.surname && user?.email ?(
                         <>
                         <div className=" flex flex-row focus:scale-120 cursor-pointer transform duration-200 ease-linear">
                             <p 
@@ -33,7 +33,7 @@ export default function Navbar({user,setUser}){
                         </>
                     ):(
                         <div className=" flex flex-row">
-                            <p className="pr-1.5">Benvenuto ospite</p>
+                            <p className="pr-1.5 text-red-500">Benvenuto ospite</p>
                         </div>
                     )
                     }{

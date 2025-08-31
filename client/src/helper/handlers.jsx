@@ -87,3 +87,18 @@ export const redirectToProvider = (provider, movieTitle) => {
     // Se invece vuoi usare React Router (ma in questo caso sono link esterni, quindi poco utile):
     // navigate(url);
 };
+
+export const getMovies = async (filterBy = "popular") => {
+  try {
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/movie/${filterBy}?language=en`,
+      {
+        params: { api_key: "ae7e3d3ba153dd817538a94cd60ac92e" },
+      }
+    );
+    return res.data.results || []
+  } catch (error) {
+    console.error(error)
+    return [] 
+  }
+};

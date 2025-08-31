@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 export default function FormLogin({ user, setUser }) {
+  const [invalid, setInvalid] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -13,7 +15,7 @@ export default function FormLogin({ user, setUser }) {
         navigate('/home')
       }
     } catch (error) {
-      alert(error.response.data.message)
+      setInvalid(true)
       console.error(error)
     }
     setUser({ email: "", password: "" })
@@ -22,6 +24,7 @@ export default function FormLogin({ user, setUser }) {
   return (
     <div className="flex flex-col items-center h-full mt-8">
       <h1 className="text-4xl p-2.5">Accedi</h1>
+      {invalid && <p className="text-red-500">Email o password errati</p>}
       <form onSubmit={handleSubmit} className="w-full flex items-start justify-center flex-col h-auto rounded-3xl p-6 pt-0">
         <label htmlFor="email" className="self-start">
           Email
@@ -51,6 +54,7 @@ export default function FormLogin({ user, setUser }) {
           className="bg-amber-500 w-full md:w-1/3 h-8 cursor-pointer rounded-md text-white font-semibold"
         />
       </form>
+      <p>Non hai un account? <span className="text-red-500 hover:cursor-pointer underline underline-offset-4 focus:text-red-600" onClick={() => navigate("/register")}>Registrati</span></p>
     </div>
   )
 }
