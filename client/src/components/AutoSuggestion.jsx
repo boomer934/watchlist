@@ -55,7 +55,7 @@ export default function AutoSuggestion({isOpenState,setIsOpenState}){
                                 alt={movie.title} 
                                 className="max-h-[60px] max-w-[60px]"/>
                                 <div className=" flex flex-col">
-                                    <button className=" text-left max-h-[50px] line-clamp-2 flex">
+                                    <button className=" text-left max-h-[50px] flex line-clamp-2">
                                         {movie.title}
                                     </button>
                                     <span className="text-[10px]">{movie.release_date ? movie.release_date.slice(0,4) : "N/A"} TV</span>
