@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { UserContext,AddContext } from "../App"
 import { useLocation, useParams } from "react-router-dom"
 import Navbar from "./NavBar"
@@ -7,11 +7,19 @@ import { useQuery } from "@tanstack/react-query"
 import { redirectToProvider } from "../helper/handlers"
 
 export default function CardDetails(){
-
+    
     const {id} = useParams
     const {add,setAdd} = useContext(AddContext)
     const {user,setUser} = useContext(UserContext)
     const movie = useLocation().state?.movie
+
+    useEffect(()=>{
+        if (add === "Aggiunto"  || add === "Già in watchlist") {
+            setTimeout(() => {
+                setAdd("Aggiungi");
+            }, 3000);
+        }
+    },[add])
 
     const {
         status,
@@ -43,8 +51,10 @@ export default function CardDetails(){
                                 className="z-10 w-[100px] h-[150px] ml-8 mb-3"/>
                                 <button 
                                 className="z-10 ml-8 h-auto bg-red-500 text-white text-[13px] p-1 mb-3 rounded focus:bg-red-600 text-center focus:scale-110 transform duration-100 ease-linear"
-                                onClick={(e)=>handleClick(movie,setAdd)}>
-                                    aggiungi alla watchlist
+                                onClick={(e)=>{
+                                    handleClick(movie,setAdd)
+                                    }}>
+                                    {add}
                                 </button>
                             </div>
                             
@@ -81,10 +91,10 @@ export default function CardDetails(){
                                         </tr>
                                     </tbody>
                                 </table>
-                                <h2 className=" p-4 font-semibold text-lg">Disponibile ora su</h2>
+                                <h2 className=" p-4 font-semibold text-lg text-center">Disponibile ora su</h2>
                                 {status === "success" && (
                                     <div className="flex flex-row flex-wrap justify-evenly">
-                                        {(watchProviders?.results?.IT?.flatrate ?? watchProviders?.results?.IT?.buy ?? []).map(
+                                        {(watchProviders?.results?.IT?.flatrate ?? watchProviders?.results?.IT?.buy ?? watchProviders?.results?.US?.flatrate ?? watchProviders?.results?.US?.buy ??[]).map(
                                         (provider) => (
                                             <img
                                             src={`https://image.tmdb.org/t/p/w500/${provider.logo_path}`}
@@ -96,7 +106,14 @@ export default function CardDetails(){
                                         )
                                         )}
                                     </div>
-                                    )}
+                                )}
+                                {
+                                    status === "pending" && (
+                                        <div className="flex flex-row justify-center">
+                                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
