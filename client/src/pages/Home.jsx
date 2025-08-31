@@ -7,6 +7,7 @@ import axios from "axios"
 import { UserContext, MovieTitleContext, MoviesContext,OpenStateContext } from "../App"
 import { useQuery } from "@tanstack/react-query"
 import { getMovies } from "../helper/handlers"
+import Footer from "../components/Footer"
 
 export default function Home(){
     const {user,setUser} = useContext(UserContext)
@@ -36,9 +37,13 @@ export default function Home(){
             <Navbar user={user} setUser={setUser}></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
-            {movies?.map((movie) => (
-                <Card movie={movie} key={movie.id} />
-            ))}
+            <div 
+            className="relative h-full md:grid md:grid-cols-2 md:gap-2 md:grid-flow-row lg:grid-cols-3 lg:gap-2">
+                {movies?.map((movie) => (
+                    <Card movie={movie} key={movie.id} />
+                ))}
+            </div>
+            <Footer/>
         </>
     )
 }
