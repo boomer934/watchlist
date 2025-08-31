@@ -43,7 +43,7 @@ export default function AutoSuggestion({isOpenState,setIsOpenState}){
     return(
         <div className="flex justify-center">
             {isOpenState && movieTitle && moviesSuggestion !== undefined ? (
-                <div className=" absolute h-[224px] w-[180px]   top-[145px] rounded-xl p-4 overflow-y-scroll bg-gray-400 shadow-md">
+                <div className=" absolute h-[224px] w-[180px]   top-[145px] rounded-xl p-4 overflow-y-scroll bg-gray-400 shadow-md z-50">
                     <ul className=" flex flex-col gap-2 justify-start">
                         {moviesSuggestion.filter((movie)=> movie.poster_path !== null && movie.release_date !== null).map((movie,index)=>(
                             <li 
