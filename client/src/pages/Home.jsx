@@ -28,7 +28,8 @@ export default function Home(){
 
       useEffect(() => {
             if (queryMovies) {
-            setMovies(queryMovies);
+                console.log(queryMovies);
+            setMovies(queryMovies.results);
             }
         }, [queryMovies]);
 

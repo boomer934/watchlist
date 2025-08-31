@@ -16,8 +16,8 @@ export default function SearchBar({movieTitle,setMovieTitle}){
         })
         .then(res => {
             res.data
-            console.log(res.data.results)
-            const movies = res.data.results
+            console.log(res.data)
+            const movies = res.data
             setMovieTitle("")
             setIsOpenState(false)
             navigate("/home/search",{state:{movies:movies}})
@@ -46,7 +46,7 @@ export default function SearchBar({movieTitle,setMovieTitle}){
                 }}
                 className=" px-3 my-2 outline-1 outline-gray-500 rounded-3xl  placeholder:text-black" />
                 <button 
-                onClick={()=>handleSubmit}
+                onClick={handleSubmit}
                 className=" px-3 py-1 my-2 outline-1 outline-gray-500 rounded-3xl focus:scale-110 focus:bg-gray-200  transition ease-in-out duration-200 ">Cerca</button>
             </div>
             <AutoSuggestion isOpenState={isOpenState} setIsOpenState={setIsOpenState}/>

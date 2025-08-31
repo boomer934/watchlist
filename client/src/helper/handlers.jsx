@@ -96,7 +96,7 @@ export const getMovies = async (filterBy = "popular") => {
         params: { api_key: "ae7e3d3ba153dd817538a94cd60ac92e" },
       }
     );
-    return res.data.results || []
+    return res.data || []
   } catch (error) {
     console.error(error)
     return [] 

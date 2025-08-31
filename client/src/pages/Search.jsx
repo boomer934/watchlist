@@ -17,7 +17,7 @@ export default function Search() {
             <Navbar user={user} setUser={setUser}></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
             <BackToHome/>
-            {movies && movies.filter((movie)=>(movie.poster_path !== null)).map((movie,index)=>(<Card movie={movie} key={index}></Card>))}
+            {movies?.results && movies.results.filter((movie)=>(movie.poster_path !== null)).map((movie,index)=>(<Card movie={movie} key={index}></Card>))}
             <Footer/>
         </>
     )
