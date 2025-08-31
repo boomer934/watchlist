@@ -70,12 +70,12 @@ export default function CardDetails(){
                                 <h1 className="text-xl font-bold text-left p-4">
                                     Scheda tecnica
                                 </h1>
-                                <table className="place-self-center text-center bg-gray-300 shadow-xl/30
+                                <table className="place-self-center max-w-[320px] md:max-w-[500px] text-center bg-gray-300 shadow-xl/30
                                 shadow-red-500 rounded-2xl border-separate border-spacing-0 overflow-hidden">
                                     <tbody>
                                         <tr>
                                             <td className="p-4 border-b border-gray-500 font-semibold">Titolo originale:</td>
-                                            <td className="p-4 border-b border-gray-500">{movie.original_title}</td>
+                                            <td className="p-4 h-auto max-w-[58px] md:max-w-[100px]  border-b border-gray-500 text-wrap">{movie.original_title}</td>
                                         </tr>
                                         <tr>
                                             <td className="p-4 border-b border-gray-500 font-semibold">Lingua originale:</td>
