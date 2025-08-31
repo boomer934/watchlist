@@ -40,7 +40,7 @@ export default function Home(){
             <div 
             className="relative h-full md:grid md:grid-cols-2 md:gap-2 md:grid-flow-row lg:grid-cols-3 lg:gap-2">
                 {movies?.map((movie) => (
-                    <Card movie={movie} key={movie.id} />
+                    <Card movie={movie} key={movie.id + movie.title} />
                 ))}
             </div>
             <Footer/>
