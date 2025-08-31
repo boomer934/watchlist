@@ -20,7 +20,7 @@ export default function SearchBar({movieTitle,setMovieTitle}){
             const movies = res.data
             setMovieTitle("")
             setIsOpenState(false)
-            navigate("/home/search",{state:{movies:movies}})
+            navigate("/home/search/page/:pageId",{state:{movies:movies}})
         })
         .catch(err => {
             console.log(err)

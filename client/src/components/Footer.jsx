@@ -1,22 +1,10 @@
 import { useLocation } from "react-router-dom"
 import { useRef,useEffect } from "react"
 export default function Footer() {
-    const location = useLocation()
-    const ref = useRef(null)
-
-    useEffect(() => {
-    if (ref.current) {
-      if (location.pathname === "/home/search" || location.pathname === "/home") {
-        ref.current.style.position = "fixed";
-      } else {
-        ref.current.style.position = "relative";
-      }
-    }
-  }, [location.pathname]);
 
   return (
     <>
-        <footer ref={ref} className="bottom-0 bg-gray-900/90 p-4 w-full flex justify-center items-center">
+        <footer className="relative bottom-0 bg-gray-900/90 p-4 w-full flex justify-center items-center">
             <p className="text-red-500 after:content-[_] after:ml-1">
                 <span  className="mr-1">
                     Made with ❤️ by

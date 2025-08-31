@@ -3,13 +3,15 @@ import Navbar from "../components/NavBar"
 import SearchBar from "../components/SearchBar"
 import Card from "../components/Card"
 import Filter from "../components/Filter"
-import axios from "axios"
 import { UserContext, MovieTitleContext, MoviesContext,OpenStateContext } from "../App"
 import { useQuery } from "@tanstack/react-query"
 import { getMovies } from "../helper/handlers"
 import Footer from "../components/Footer"
+import PagesNavigation from "../components/PagesNavigation"
+import { useParams } from "react-router-dom"
 
 export default function Home(){
+    const {pageId} = useParams()
     const {user,setUser} = useContext(UserContext)
     const {movies,setMovies} = useContext(MoviesContext)
     const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
@@ -33,6 +35,9 @@ export default function Home(){
             }
         }, [queryMovies]);
 
+        useEffect(()=>{
+            console.log(pageId)
+        },[pageId])
     return(
         <>
             <Navbar user={user} setUser={setUser}></Navbar>
@@ -44,6 +49,7 @@ export default function Home(){
                     <Card movie={movie} key={movie.id + movie.title} />
                 ))}
             </div>
+            <PagesNavigation pageId={pageId}/>
             <Footer/>
         </>
     )

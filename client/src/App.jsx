@@ -35,8 +35,8 @@ function App() {
                     <Routes>
                       <Route path='/register' element={<Register/>}/>
                       <Route path='/login' element={<Login/>}/>
-                      <Route path='/home' element={<Home/>}/>
-                      <Route path='/home/search' element={<Search/>}/>
+                      <Route path='/home/page/:pageId' element={<Home/>}/>
+                      <Route path='/home/search/page/:pageId' element={<Search/>}/>
                       <Route path='/area_personale' element={<PersonalArea/>}/>
                       <Route path={`/home/search/movie/:id`} element={<CardDetails/>}/>
                     </Routes>
