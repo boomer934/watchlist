@@ -6,7 +6,9 @@ import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import Search from './pages/Search'
 import { createContext, useState } from 'react'
 import CardDetails from './components/CardDetails'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
+const queryClient = new QueryClient()
 const UserContext = createContext()
 const MovieTitleContext = createContext()
 const MoviesContext = createContext()
@@ -22,28 +24,30 @@ function App() {
   const [add, setAdd] = useState("Aggiungi")
   return (
     <>
-    <UserContext.Provider value={{user,setUser}}>
-      <MovieTitleContext.Provider value={{movieTitle,setMovieTitle}}>
-        <MoviesContext.Provider value={{movies,setMovies}}>
-          <MovieContext.Provider value={{movie,setMovie}}>
-            <OpenStateContext.Provider value={{isOpenState,setIsOpenState}}>
-              <AddContext.Provider value={{add,setAdd}}>
-                <Router>
-                  <Routes>
-                    <Route path='/register' element={<Register/>}/>
-                    <Route path='/login' element={<Login/>}/>
-                    <Route path='/home' element={<Home/>}/>
-                    <Route path='/home/search' element={<Search/>}/>
-                    <Route path='/area_personale' element={<PersonalArea/>}/>
-                    <Route path='/home/search/movie' element={<CardDetails/>}/>
-                  </Routes>
-                </Router>
-              </AddContext.Provider>
-            </OpenStateContext.Provider>
-          </MovieContext.Provider>
-        </MoviesContext.Provider>
-      </MovieTitleContext.Provider>
-    </UserContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <UserContext.Provider value={{user,setUser}}>
+        <MovieTitleContext.Provider value={{movieTitle,setMovieTitle}}>
+          <MoviesContext.Provider value={{movies,setMovies}}>
+            <MovieContext.Provider value={{movie,setMovie}}>
+              <OpenStateContext.Provider value={{isOpenState,setIsOpenState}}>
+                <AddContext.Provider value={{add,setAdd}}>
+                  <Router>
+                    <Routes>
+                      <Route path='/register' element={<Register/>}/>
+                      <Route path='/login' element={<Login/>}/>
+                      <Route path='/home' element={<Home/>}/>
+                      <Route path='/home/search' element={<Search/>}/>
+                      <Route path='/area_personale' element={<PersonalArea/>}/>
+                      <Route path={`/home/search/movie/:id`} element={<CardDetails/>}/>
+                    </Routes>
+                  </Router>
+                </AddContext.Provider>
+              </OpenStateContext.Provider>
+            </MovieContext.Provider>
+          </MoviesContext.Provider>
+        </MovieTitleContext.Provider>
+      </UserContext.Provider>
+    </QueryClientProvider>
     </>
     
   )

@@ -19,7 +19,7 @@ export default function AutoSuggestion({isOpenState,setIsOpenState}){
             },
             headers: { Authorization: `Bearer ${token}` }
         })
-        .then(res=>navigate(`/home/search/movie`,{state:{movie:res.data}}))
+        .then(res=>navigate(`/home/search/movie/${movie.id}`,{state:{movie:res.data}}))
         .catch(err=>console.log(err))
         } catch (error){
             console.error(error.response.data.message)
