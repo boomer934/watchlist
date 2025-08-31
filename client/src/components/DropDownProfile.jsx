@@ -1,5 +1,7 @@
 
+import { useNavigate } from "react-router-dom"
 export default function DropDownProfile(){
+  const navigate = useNavigate()
     return(
       <>
       <div className="bg-gray-700 absolute right-9 top-14 w-12 h-12 rotate-[45deg]"></div>
@@ -7,7 +9,7 @@ export default function DropDownProfile(){
             <ul className=" flex flex-col gap-4">
                 {/* <li>Logout</li> */}
                 <li>Profile</li>
-                <li>Settings</li>
+                <li onClick={()=>navigate("/home")}>Home</li>
             </ul>
         </div>
       </>
