@@ -1,6 +1,6 @@
-import { useState, useContext, useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { UserContext,AddContext } from "../App"
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import Navbar from "./NavBar"
 import { handleClick, getWatchProviders } from "../helper/handlers"
 import { useQuery } from "@tanstack/react-query"
@@ -9,7 +9,6 @@ import Footer from "./Footer"
 
 export default function CardDetails(){
     
-    const {id} = useParams
     const {add,setAdd} = useContext(AddContext)
     const {user,setUser} = useContext(UserContext)
     const movie = useLocation().state?.movie
