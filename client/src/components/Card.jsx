@@ -1,4 +1,5 @@
 import { handleClick , handleRedirect } from "../helper/handlers"
+import { AddContext } from "../App"
 import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 export default function Card({movie}){
