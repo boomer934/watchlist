@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import axios from "axios"
 import DropDownProfile from "./DropDownProfile"
 export default function Navbar({user,setUser}){
     const [isOpen , setIsOpen] = useState(false)
+    const location = useLocation()
     useEffect(()=>{
         const token = localStorage.getItem("token")
         axios.get("http://localhost:5000/home",{
@@ -21,22 +23,29 @@ export default function Navbar({user,setUser}){
                     <div className="flex-shrink-0">
                         <h1 className="text-[21px] font-bold tracking-wide text-red-500 pr-1.5">WATCHLIST</h1>
                     </div>
-                    { user?.name && user?.surname && user?.email ?(
+                    
                         <>
                         <div className=" flex flex-row focus:scale-120 cursor-pointer transform duration-200 ease-linear">
-                            <p 
-                            className="pr-1.5 bg-red-500 p-1.5 rounded-xl"
-                            onClick={()=>setIsOpen((prev)=>!prev)}>
-                                Benvenuto {user.name} {user.surname}
-                            </p>
+                            {location.pathname === "/login" || location.pathname === "/register" ? (
+                                <></> 
+                            ) : user && user.name && user.surname ? (
+                                <p
+                                className="bg-red-500  rounded-xl p-2"
+                                onClick={() => setIsOpen((prev) => !prev)}
+                                >
+                                    <span>Benvenuto {user.name}</span>
+                                </p>
+                            ) : (
+                                <p
+                                className="bg-red-500  rounded-xl p-2"
+                                onClick={() => setIsOpen((prev) => !prev)}
+                                >
+                                    <span>Benvenuto Ospite</span>
+                                </p>
+                            )}
                         </div>
                         </>
-                    ):(
-                        <div className=" flex flex-row">
-                            <p className="pr-1.5 text-red-500">Benvenuto ospite</p>
-                        </div>
-                    )
-                    }{
+                    {
                         isOpen && <DropDownProfile/>
                     }
                     

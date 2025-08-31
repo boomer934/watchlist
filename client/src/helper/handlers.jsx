@@ -102,3 +102,11 @@ export const getMovies = async (filterBy = "popular") => {
     return [] 
   }
 };
+
+export const toProfileOrLogin = (navigate,token)=>{
+    if(!token){
+        alert("Devi essere loggato per vedere il tuo profilo")
+        navigate("/login")
+    }
+    else navigate("/profile")
+}

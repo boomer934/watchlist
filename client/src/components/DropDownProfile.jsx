@@ -1,6 +1,7 @@
-
+import { toProfileOrLogin } from "../helper/handlers"
 import { useNavigate } from "react-router-dom"
 export default function DropDownProfile(){
+  const token = localStorage.getItem("token")
   const navigate = useNavigate()
     return(
       <>
@@ -8,7 +9,7 @@ export default function DropDownProfile(){
         <div className=" flex flex-col absolute bg-gray-700 text-white shadow-md right-6 top-15 rounded-2xl p-3 z-20 cursor-pointer">
             <ul className=" flex flex-col gap-4">
                 {/* <li>Logout</li> */}
-                <li>Profile</li>
+                <li onClick={()=>{toProfileOrLogin(navigate,token)}}>Profile</li>
                 <li onClick={()=>navigate("/home")}>Home</li>
             </ul>
         </div>
