@@ -1,13 +1,20 @@
 import { useEffect, useState, useContext } from "react"
 import { useLocation } from "react-router-dom"
-import axios from "axios"
 import DropDownProfile from "./DropDownProfile"
-import { UserContext } from "../App"
+import { UserContext, UserNameContext } from "../App"
 export default function Navbar(){
     const [isOpen , setIsOpen] = useState(false)
     const {user,setUser} = useContext(UserContext)
+    const {userName,setUserName} = useContext(UserNameContext)
     const location = useLocation()
-   
+
+    useEffect(() => {
+        const name = localStorage.getItem("name")
+        if (name) {
+            setUserName(name)
+        }
+    },[])
+
     return(
         <>
             <nav className="bg-gray-900 text-white shadow-md h-[8vh] sm:h-[80px] p-4">
@@ -22,12 +29,12 @@ export default function Navbar(){
                         <div className=" flex flex-row focus:scale-120 cursor-pointer transform duration-200 ease-linear">
                             {location.pathname === "/login" || location.pathname === "/register" ? (
                                 <></> 
-                            ) : user && user?.name && user?.surname ? (
+                            ) : userName ? (
                                 <p
                                 className="bg-red-500  rounded-xl p-2 py-1"
                                 onClick={() => setIsOpen((prev) => !prev)}
                                 >
-                                    <span className=" text-nowrap">Benvenuto {user.name}</span>
+                                    <span className=" text-nowrap">Benvenuto {userName}</span>
                                 </p>
                             ) : (
                                 <p

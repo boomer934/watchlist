@@ -1,10 +1,11 @@
 import { handleLogout, toProfileOrLogin } from "../helper/handlers"
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react"
-import { UserContext } from "../App"
+import { UserContext, UserNameContext } from "../App"
 import 'animate.css'
 export default function DropDownProfile({isOpen}){
   const {user,setUser} = useContext(UserContext)
+  const {userName,setUserName} = useContext(UserNameContext)
   const token = localStorage.getItem("token")
   const navigate = useNavigate()
 
@@ -18,7 +19,7 @@ export default function DropDownProfile({isOpen}){
                 {/* <li>Logout</li> */}
                 <li onClick={()=>{toProfileOrLogin(navigate,token)}}>Watchlist</li>
                 <li onClick={()=>navigate("/home/page/1")}>Home</li>
-                <li onClick={()=>handleLogout(user,setUser)}>Logout</li>
+                <li onClick={()=>handleLogout(user,setUser,userName,setUserName)}>Logout</li>
             </ul>
         </div>
       </>

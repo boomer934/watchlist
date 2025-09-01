@@ -131,7 +131,7 @@ export const searchMovies = async (query, pageId = 1) => {
   }
 };
 
-export const handleLogout = async(user,setUser) =>{
+export const handleLogout = async(user,setUser,userName,setUserName) =>{
     
     try {
         const token = localStorage.getItem("token")
@@ -140,6 +140,7 @@ export const handleLogout = async(user,setUser) =>{
         })
         localStorage.clear()
         setUser({})
+        setUserName("")
         return res.data
     } catch (error) {
         console.error(error.response.data.message)
