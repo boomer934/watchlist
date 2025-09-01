@@ -8,7 +8,7 @@ export default function Login(){
     return(
         <>
             <Navbar></Navbar>
-            <FormLogin user={user} setUser={setUser}></FormLogin>
+            <FormLogin></FormLogin>
         </>
     )
 }

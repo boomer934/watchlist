@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState,useContext } from 'react'
+import { UserContext } from '../App'
 
-export default function FormLogin({ user, setUser }) {
+export default function FormLogin() {
+  const {user,setUser} = useContext(UserContext)
   const [invalid, setInvalid] = useState(false)
   const navigate = useNavigate()
 
@@ -10,7 +12,9 @@ export default function FormLogin({ user, setUser }) {
     e.preventDefault()
     try {
       const response = await axios.post("http://localhost:5000/login", user)
+      console.log(response)
       localStorage.setItem("token", response.data.token)
+      setUser({name:response.data.name,surname:response.data.surname,email:response.data.email})
       if (response.status === 200) {
         navigate('/')
       }
@@ -18,7 +22,6 @@ export default function FormLogin({ user, setUser }) {
       setInvalid(true)
       console.error(error)
     }
-    setUser({ email: "", password: "" })
   }
 
   return (

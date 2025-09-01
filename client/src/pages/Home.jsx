@@ -39,7 +39,7 @@ export default function Home(){
         },[pageId])
     return(
         <>
-            <Navbar user={user} setUser={setUser}></Navbar>
+            <Navbar></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
             <div 

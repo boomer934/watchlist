@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useLocation } from "react-router-dom"
 import axios from "axios"
 import DropDownProfile from "./DropDownProfile"
-export default function Navbar({user,setUser}){
+import { UserContext } from "../App"
+export default function Navbar(){
     const [isOpen , setIsOpen] = useState(false)
+    const {user,setUser} = useContext(UserContext)
     const location = useLocation()
-    useEffect(()=>{
-        const token = localStorage.getItem("token")
-        if(!token){
-            return 
-        }
-        axios.get("http://localhost:5000/home",{
-            headers: { Authorization: `Bearer ${token}` }
-        })
-        .then(res=>{
-            setUser({name:res.data.name,surname:res.data.surname,email:res.data.email})
-        })
-    },[])
+   
     return(
         <>
             <nav className="bg-gray-900 text-white shadow-md h-[8vh] sm:h-[80px] p-4">
@@ -31,7 +22,7 @@ export default function Navbar({user,setUser}){
                         <div className=" flex flex-row focus:scale-120 cursor-pointer transform duration-200 ease-linear">
                             {location.pathname === "/login" || location.pathname === "/register" ? (
                                 <></> 
-                            ) : user && user.name && user.surname ? (
+                            ) : user && user?.name && user?.surname ? (
                                 <p
                                 className="bg-red-500  rounded-xl p-2 py-1"
                                 onClick={() => setIsOpen((prev) => !prev)}

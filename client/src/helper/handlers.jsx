@@ -109,7 +109,7 @@ export const toProfileOrLogin = (navigate) => {
         return;
     }
 
-    navigate("/profile");
+    navigate("/home/watchlist");
 }
 
 export const searchMovies = async (query, pageId = 1) => {
