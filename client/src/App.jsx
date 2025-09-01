@@ -1,6 +1,5 @@
 import Home from './pages/Home'
 import Login from './pages/Login'
-import PersonalArea from './pages/PersonalArea'
 import Register from './pages/Register'
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import Search from './pages/Search'
@@ -8,6 +7,7 @@ import { createContext, useState } from 'react'
 import CardDetails from './components/CardDetails'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Navigate } from 'react-router-dom'
+import Watchlist from './pages/Watchlist'
 
 const queryClient = new QueryClient()
 const UserContext = createContext()
@@ -39,7 +39,7 @@ function App() {
                       <Route path='/login' element={<Login/>}/>
                       <Route path='/home/page/:pageId' element={<Home/>}/>
                       <Route path='/home/search/:movieTitleParam/:pageId' element={<Search/>}/>
-                      <Route path='/area_personale' element={<PersonalArea/>}/>
+                      <Route path='/home/watchlist' element={<Watchlist/>}/>
                       <Route path={`/home/search/movie/:id`} element={<CardDetails/>}/>
                     </Routes>
                   </Router>

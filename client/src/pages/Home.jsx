@@ -43,7 +43,7 @@ export default function Home(){
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
             <div 
-            className="relative h-full md:grid md:grid-cols-2 md:gap-2 md:grid-flow-row lg:grid-cols-3 lg:gap-2">
+            className="relative h-full md:grid md:grid-cols-2 md:gap-2 md:grid-flow-row xl:grid-cols-3 xl:gap-2">
                 {movies?.results?.map((movie) => (
                     <Card movie={movie} key={movie.id + movie.title} />
                 ))}
