@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { MovieTitleContext, MoviesContext, MovieContext } from "../App"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import CloseAutoSuggestion from "./CloseAutoSuggestion"
 export default function AutoSuggestion({isOpenState,setIsOpenState}){
     const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
     const {movie,setMovie} = useContext(MovieContext)
@@ -66,7 +67,9 @@ export default function AutoSuggestion({isOpenState,setIsOpenState}){
                 </div>
             ):(
                 <></>
-            )}
+            )
+            }
         </div>
+        
     )
 }

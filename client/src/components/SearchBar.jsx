@@ -3,6 +3,7 @@ import axios from "axios"
 import { useContext, useEffect } from "react"
 import { OpenStateContext,MoviesContext } from "../App"
 import AutoSuggestion from "./AutoSuggestion"
+import CloseAutoSuggestion from "./CloseAutoSuggestion"
 
 export default function SearchBar({movieTitle,setMovieTitle,pageId=1}){
     const {isOpenState,setIsOpenState} = useContext(OpenStateContext)
@@ -51,6 +52,7 @@ export default function SearchBar({movieTitle,setMovieTitle,pageId=1}){
                 className=" px-3 py-1 my-2 outline-1 outline-gray-500 rounded-3xl focus:scale-110 focus:bg-gray-200  transition ease-in-out duration-200 ">Cerca</button>
             </div>
             <AutoSuggestion isOpenState={isOpenState} setIsOpenState={setIsOpenState}/>
+            <CloseAutoSuggestion/>
         </>
     )
 }
