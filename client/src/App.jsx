@@ -7,6 +7,7 @@ import Search from './pages/Search'
 import { createContext, useState } from 'react'
 import CardDetails from './components/CardDetails'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Navigate } from 'react-router-dom'
 
 const queryClient = new QueryClient()
 const UserContext = createContext()
@@ -33,6 +34,7 @@ function App() {
                 <AddContext.Provider value={{add,setAdd}}>
                   <Router>
                     <Routes>
+                      <Route path='/' element={<Navigate to={'/home/page/1'}/>}/>
                       <Route path='/register' element={<Register/>}/>
                       <Route path='/login' element={<Login/>}/>
                       <Route path='/home/page/:pageId' element={<Home/>}/>
