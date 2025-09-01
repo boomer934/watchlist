@@ -12,7 +12,7 @@ export default function FormLogin({ user, setUser }) {
       const response = await axios.post("http://localhost:5000/login", user)
       localStorage.setItem("token", response.data.token)
       if (response.status === 200) {
-        navigate('/home')
+        navigate('/')
       }
     } catch (error) {
       setInvalid(true)

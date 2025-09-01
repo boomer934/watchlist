@@ -1,7 +1,4 @@
 import axios from "axios";
-import { useReducer } from "react";
-import { useParams } from "react-router-dom";
-
 
 export const handleClick = async (movie,setAdd) => {
     const token = localStorage.getItem("token");
@@ -129,3 +126,18 @@ export const searchMovies = async (query, pageId = 1) => {
     return [];
   }
 };
+
+export const handleLogout = async(user,setUser) =>{
+    
+    try {
+        const token = localStorage.getItem("token")
+        const res = await axios.post("http://localhost:5000/logout",{},{
+            headers : {Authorization : `Bearer ${token}`}
+        })
+        localStorage.clear()
+        setUser({})
+        return res.data
+    } catch (error) {
+        console.error(error.response.data.message)
+    }
+}

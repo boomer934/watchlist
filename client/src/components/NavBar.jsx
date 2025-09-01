@@ -7,6 +7,9 @@ export default function Navbar({user,setUser}){
     const location = useLocation()
     useEffect(()=>{
         const token = localStorage.getItem("token")
+        if(!token){
+            return 
+        }
         axios.get("http://localhost:5000/home",{
             headers: { Authorization: `Bearer ${token}` }
         })

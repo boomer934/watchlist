@@ -77,4 +77,14 @@ router.post("/watchlist", verifyToken, async(req,res)=>{
     if(response) return res.json({"message":"film aggiunto alla watchlist"})
 })
 
+const blacklist = require('../blacklist')
+router.post("/logout",(req,res)=>{
+    const token = req.headers?.authorization?.split(" ")[1]
+    blacklist.push(token)
+    return (res.json({
+        "message":"logout effettuato con successo",
+        "blacklist":blacklist
+    }))
+})
+
 module.exports = router
