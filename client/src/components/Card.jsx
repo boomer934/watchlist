@@ -1,7 +1,8 @@
 import { handleClick , handleRedirect } from "../helper/handlers"
 import { useEffect,useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate,useLocation } from "react-router-dom"
 export default function Card({movie}){
+    const location = useLocation();
     
     const [add, setAdd] = useState("Aggiungi")
     const navigate = useNavigate()
@@ -20,7 +21,7 @@ export default function Card({movie}){
         {movie && movie.poster_path !== undefined && movie.poster_path !== null ? (
             <div 
             className="flex flex-row justify-start p-3 m-3 gap-4 h-[224px] rounded-md bg-gray-400/50 "
-            onClick={()=>handleRedirect(movie,navigate)}>
+            onClick={()=>handleRedirect(movie,navigate,location)}>
                <img 
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} 
                     alt={movie.original_title} 
@@ -38,7 +39,7 @@ export default function Card({movie}){
                     }
                     >
                         {add}
-                    </button>
+                    </button>   
                 </div>
                 <div>
                     <span className="text-[14px]">

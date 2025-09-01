@@ -7,7 +7,6 @@ const JWT_SECRET = process.env.JWT_SECRET
 function verifyToken(req,res,next){ 
     const authHeader = req.headers['authorization']
     const token = authHeader?.split(' ')[1]
-    console.log("token: ",token)
 
     if(blacklist.includes(token)){
         res.status(404).json({"message":"Token invalido , usato per il logout"})

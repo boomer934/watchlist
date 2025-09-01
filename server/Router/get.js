@@ -12,8 +12,8 @@ router.get("/home",(req,res)=>{
 
 router.get("/watchlist",verifyToken,async(req,res)=>{
     console.log(req.user)
-    const {id} = req.user
-    const response = await executeQuery("SELECT * FROM Watchlist WHERE user_id = ?",[id])
+    const {user_id} = req.user
+    const response = await executeQuery("SELECT * FROM Watchlist WHERE user_id = ?",[user_id])
     return res.status(200).json(response)
 })
 

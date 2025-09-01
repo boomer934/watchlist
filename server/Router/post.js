@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
 
         // Login ok
         const token = jwt.sign(
-            {id : user[0].id , name: user[0].name,surname:user[0].surname,email : user[0].email},
+            {user_id : user[0].id , name: user[0].name,surname:user[0].surname,email : user[0].email},
             process.env.JWT_SECRET,
             {expiresIn: "1h"}
         )
@@ -70,17 +70,27 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/watchlist", verifyToken, async(req,res)=>{
-    const {original_title,vote_average,poster_path} = req.body
-    const {id} = req.user
-    const checkFilm = await executeQuery("SELECT title FROM Watchlist WHERE user_id = ? AND title = ?",[id,original_title])
-    if(checkFilm.length > 0) return res.status(400).json({"message":"film gia presente nella watchlist"})
-    const query = "INSERT INTO Watchlist(user_id,title,image_url,rating) VALUES (?,?,?,?)"
-    const response = await executeQuery(query,[id,original_title,poster_path,vote_average])
+    const {title,vote_average,poster_path,id} = req.body.movie
+    const option = req.body.option
+    const { user_id } = req.user 
+    console.log("user_id:", user_id, typeof user_id);
+ 
+    const checkFilm = await executeQuery(
+        "SELECT title FROM Watchlist WHERE user_id = ? AND title = ?",
+        [user_id, title]
+    )
+    if(checkFilm.length > 0) 
+        return res.status(400).json({"message":"film già presente nella watchlist"})
+
+    const query = "INSERT INTO Watchlist(original_movie_id,user_id,title,image_url,status,rating) VALUES (?,?,?,?,?,?)"
+    const response = await executeQuery(query, [id, user_id, title, poster_path, option ,vote_average])
+    
     if(response) return res.status(200).json({
         "message":"film aggiunto alla watchlist",
-        "response":response,
+        "response": response,
     })
 })
+
 
 const blacklist = require('../blacklist')
 router.post("/logout",(req,res)=>{

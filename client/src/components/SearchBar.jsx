@@ -5,7 +5,7 @@ import { OpenStateContext,MoviesContext,MovieTitleContext } from "../App"
 import AutoSuggestion from "./AutoSuggestion"
 import CloseAutoSuggestion from "./CloseAutoSuggestion"
 
-export default function SearchBar({pageId=1}){
+export default function SearchBar({pageId=1}) {
     const {isOpenState,setIsOpenState} = useContext(OpenStateContext)
     const {movies,setMovies} = useContext(MoviesContext)
     const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
@@ -41,7 +41,9 @@ export default function SearchBar({pageId=1}){
                 type="text"
                 placeholder="Cerca un film..."
                 value={movieTitle}
-                onChange={(e) => setMovieTitle(e.target.value)}
+                onChange={(e) => {
+                    setMovieTitle(e.target.value)
+                }}
                 onKeyDown={(e)=>{
                     if(e.key === "Enter"){
                         handleSubmit()

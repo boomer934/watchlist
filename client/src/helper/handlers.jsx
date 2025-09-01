@@ -1,11 +1,13 @@
 import axios from "axios";
 
-export const handleClick = async (movie,setAdd) => {
+export const handleClick = async (movie,setAdd,option) => {
+    console.log("Invio al backend:", movie,option);
+    console.log("Token:", localStorage.getItem("token"));
     const token = localStorage.getItem("token");
     try {
         const res = await axios.post(
         "http://localhost:5000/watchlist",
-        movie,
+        { movie,option },
         { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -18,8 +20,21 @@ export const handleClick = async (movie,setAdd) => {
         }
     }
 }
-export const handleRedirect = (movie, navigate) => {
-    axios.get(`https://api.themoviedb.org/3/movie/${movie.id}`, {
+
+export const handleRedirect = (movie, navigate,location) => {
+  let url = ""
+  let nav = ""
+  const pathname = location?.pathname || location?.location?.pathname
+  console.log(location)
+    if(pathname ==='/home/watchlist'){
+        nav = movie.original_movie_id
+        url = `https://api.themoviedb.org/3/movie/${movie.original_movie_id}`
+    }else{
+        nav = movie.id
+        url = `https://api.themoviedb.org/3/movie/${movie.id}`
+    }
+  console.log("Film selezionato:", movie);
+    axios.get(url, {
         params: {
             api_key: "ae7e3d3ba153dd817538a94cd60ac92e",
         },
@@ -29,7 +44,7 @@ export const handleRedirect = (movie, navigate) => {
     })
     .then(res => {
         console.log(res.data);
-        navigate(`/home/search/movie/${movie.id}`, { state: { movie: res.data } });
+        navigate(`/home/search/movie/${nav}`, { state: { movie: res.data } });
     })
     .catch(error => {
         console.error('Errore nel recupero del film:', error.response?.data?.message || error.message);
@@ -147,7 +162,7 @@ export const handleLogout = async(user,setUser,userName,setUserName) =>{
     }
 }
 
-export const getWatchlistMovies = async () => {
+export const getWatchlistMovies = async (movieTitle) => {
   try {
     const response = await axios.get("http://localhost:5000/watchlist", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }

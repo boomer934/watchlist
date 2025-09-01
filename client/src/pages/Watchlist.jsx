@@ -1,14 +1,13 @@
-import React from 'react'
 import Navbar from '../components/NavBar'
 import Footer from '../components/Footer'
-import SearchBar from '../components/SearchBar'
 import WatchlistCards from '../components/WatchlistCards'
+import { useLocation } from 'react-router-dom'
 export default function Watchlist() {
+  const location = useLocation();
   return (
     <div className="flex flex-col h-full justify-end">
       <Navbar/>
-      <SearchBar/>
-      <WatchlistCards/>
+      <WatchlistCards location={location}/>
       <Footer className="absolute bottom-0"/>
     </div>
   )
