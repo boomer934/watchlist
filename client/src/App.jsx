@@ -15,7 +15,6 @@ const MovieTitleContext = createContext()
 const MoviesContext = createContext()
 const MovieContext = createContext()
 const OpenStateContext = createContext()
-const AddContext = createContext()
 const UserNameContext = createContext()
 function App() {
   const [user,setUser] = useState({name:"",surname:"",email:"",password:""})
@@ -23,7 +22,6 @@ function App() {
   const [movies,setMovies] = useState([{}])
   const [movie,setMovie] = useState({})
   const [isOpenState,setIsOpenState] = useState(false)
-  const [add, setAdd] = useState("Aggiungi")
   const [userName, setUserName] = useState("")
   return (
     <>
@@ -33,21 +31,19 @@ function App() {
           <MoviesContext.Provider value={{movies,setMovies}}>
             <MovieContext.Provider value={{movie,setMovie}}>
               <OpenStateContext.Provider value={{isOpenState,setIsOpenState}}>
-                <AddContext.Provider value={{add,setAdd}}>
                   <UserNameContext.Provider value={{userName,setUserName}}>
-                  <Router>
-                      <Routes>
-                        <Route path='/' element={<Navigate to={'/home/page/1'}/>}/>
-                        <Route path='/register' element={<Register/>}/>
-                        <Route path='/login' element={<Login/>}/>
-                        <Route path='/home/page/:pageId' element={<Home/>}/>
-                        <Route path='/home/search/:movieTitleParam/:pageId' element={<Search/>}/>
-                        <Route path='/home/watchlist' element={<Watchlist/>}/>
-                        <Route path={`/home/search/movie/:id`} element={<CardDetails/>}/>
-                      </Routes>
-                    </Router>
+                    <Router>
+                        <Routes>
+                          <Route path='/' element={<Navigate to={'/home/page/1'}/>}/>
+                          <Route path='/register' element={<Register/>}/>
+                          <Route path='/login' element={<Login/>}/>
+                          <Route path='/home/page/:pageId' element={<Home/>}/>
+                          <Route path='/home/search/:movieTitleParam/:pageId' element={<Search/>}/>
+                          <Route path='/home/watchlist' element={<Watchlist/>}/>
+                          <Route path={`/home/search/movie/:id`} element={<CardDetails/>}/>
+                        </Routes>
+                      </Router>
                   </UserNameContext.Provider>
-                </AddContext.Provider>
               </OpenStateContext.Provider>
             </MovieContext.Provider>
           </MoviesContext.Provider>
@@ -58,5 +54,5 @@ function App() {
     
   )
 }
-export {UserContext,MovieTitleContext,MoviesContext,OpenStateContext,MovieContext,AddContext,UserNameContext}
+export {UserContext,MovieTitleContext,MoviesContext,OpenStateContext,MovieContext,UserNameContext}
 export default App

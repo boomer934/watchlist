@@ -1,10 +1,9 @@
 import { handleClick , handleRedirect } from "../helper/handlers"
-import { AddContext } from "../App"
-import { useContext, useEffect } from "react"
+import { useEffect,useState } from "react"
 import { useNavigate } from "react-router-dom"
 export default function Card({movie}){
     
-    const {add,setAdd} = useContext(AddContext)
+    const [add, setAdd] = useState("Aggiungi")
     const navigate = useNavigate()
     
 

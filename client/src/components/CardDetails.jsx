@@ -1,5 +1,5 @@
-import { useContext, useEffect } from "react"
-import { UserContext,AddContext } from "../App"
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "../App"
 import { useLocation } from "react-router-dom"
 import Navbar from "./NavBar"
 import { handleClick, getWatchProviders } from "../helper/handlers"
@@ -9,7 +9,7 @@ import Footer from "./Footer"
 
 export default function CardDetails(){
     
-    const {add,setAdd} = useContext(AddContext)
+    const [add, setAdd] = useState("Aggiungi")
     const {user,setUser} = useContext(UserContext)
     const movie = useLocation().state?.movie
 

@@ -1,5 +1,6 @@
 const express = require('express')
 const verifyToken = require('../middlewares/middleware')
+const {executeQuery} = require('../db')
 const router = express.Router()
 
 router.get("/area_personale",verifyToken,(req,res)=>{
@@ -7,6 +8,13 @@ router.get("/area_personale",verifyToken,(req,res)=>{
 })
 router.get("/home",(req,res)=>{
     return res.status(200).json({name:req.user?.name , surname:req.user?.surname,email:req.user?.email})
+})
+
+router.get("/watchlist",verifyToken,async(req,res)=>{
+    console.log(req.user)
+    const {id} = req.user
+    const response = await executeQuery("SELECT * FROM Watchlist WHERE user_id = ?",[id])
+    return res.status(200).json(response)
 })
 
 module.exports = router

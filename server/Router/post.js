@@ -70,13 +70,16 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/watchlist", verifyToken, async(req,res)=>{
-    const {original_title,vote_average} = req.body
+    const {original_title,vote_average,poster_path} = req.body
     const {id} = req.user
     const checkFilm = await executeQuery("SELECT title FROM Watchlist WHERE user_id = ? AND title = ?",[id,original_title])
     if(checkFilm.length > 0) return res.status(400).json({"message":"film gia presente nella watchlist"})
-    const query = "INSERT INTO Watchlist(user_id,title,rating) VALUES (?,?,?)"
-    const response = await executeQuery(query,[id,original_title,vote_average])
-    if(response) return res.json({"message":"film aggiunto alla watchlist"})
+    const query = "INSERT INTO Watchlist(user_id,title,image_url,rating) VALUES (?,?,?,?)"
+    const response = await executeQuery(query,[id,original_title,poster_path,vote_average])
+    if(response) return res.status(200).json({
+        "message":"film aggiunto alla watchlist",
+        "response":response,
+    })
 })
 
 const blacklist = require('../blacklist')
