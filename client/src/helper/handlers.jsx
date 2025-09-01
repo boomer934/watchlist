@@ -162,12 +162,14 @@ export const handleLogout = async(user,setUser,userName,setUserName) =>{
     }
 }
 
-export const getWatchlistMovies = async (movieTitle) => {
+export const getWatchlistMovies = async (movieTitle,filter) => {
   try {
     const response = await axios.get("http://localhost:5000/watchlist", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     });
+    console.log("filter:", filter);
     console.log("Watchlist API:", response);
+    if(filter !== "tutti") return response.data.filter((movie) => movie.status === filter)
     return response.data || []; // assicuriamoci che sia sempre un array
   } catch (error) {
     console.error(error.response?.data?.message || error.message);

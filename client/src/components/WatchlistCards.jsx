@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { handleRedirect } from '../helper/handlers'
 import { useContext } from 'react'
 import { MovieTitleContext } from '../App'
-export default function WatchlistCards(location) {
+export default function WatchlistCards({ location,filter="tutti",elimina=false }) {
     
     const navigate=useNavigate()
     const {movieTitle,setMovieTitle}=useContext(MovieTitleContext)
@@ -14,8 +14,8 @@ export default function WatchlistCards(location) {
         isLoading,
         data:queryMovies
     }=useQuery({
-        queryKey:["WatchlistMovies"],
-        queryFn:()=>getWatchlistMovies(movieTitle),
+        queryKey:["WatchlistMovies",filter],
+        queryFn:()=>getWatchlistMovies(movieTitle,filter),
     })
 
     if (isLoading) return <p>Caricamento...</p>
@@ -23,16 +23,24 @@ export default function WatchlistCards(location) {
     console.log("queryMovies:", queryMovies)
 
     return (
+        <>
         <div className='grid grid-flow-row grid-cols-3 gap-3 p-3'>
             {queryMovies?.map((movie) => (
+            <div className='relative'>
+            {elimina &&(
+                <button className='absolute text-[15px] p-2 h-[37px] w-[37px] top-1 right-1 text-white text-2xl bg-red-500 rounded-full text-center'>x</button>
+            )}
             <img 
             key={movie.id+movie.original_movie_id} 
             onClick={()=>handleRedirect(movie,navigate,location)}
             className="w-[140px] h-[200px] rounded-lg"
             src={`https://image.tmdb.org/t/p/w500/${movie.image_url}`} 
             alt={movie.title} />
+
+            </div>
             ))}
         </div>
+        </>
     )
 }
 
