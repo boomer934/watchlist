@@ -38,7 +38,7 @@ export default function Home(){
             console.log(pageId)
         },[pageId])
     return(
-        <>
+        <div className="flex flex-col h-full justify-end">
             <Navbar></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
@@ -50,6 +50,6 @@ export default function Home(){
             </div>
             <PagesNavigation pageId={pageId}/>
             <Footer/>
-        </>
+        </div>
     )
 }

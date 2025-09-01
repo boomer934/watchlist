@@ -35,13 +35,13 @@ export default function Search() {
         }, [queryMovies]);
 
     return (
-        <>
+        <div className="flex flex-col h-full justify-end">
             <Navbar user={user} setUser={setUser}></Navbar>
             <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle} pageId={pageId}/>
             <BackToHome/>
             {movies?.results?.map((movie)=>(<Card movie={movie} key={movie.id+movie.title}></Card>))}
             <PagesNavigation pageId={pageId} movieTitleParam={movieTitleParam}/>
             <Footer/>
-        </>
+        </div>
     )
 }

@@ -32,7 +32,7 @@ export default function CardDetails(){
     })
 
     return (
-        <>
+        <div className="flex flex-col h-full justify-end">
             <Navbar user={user} setUser={setUser}/>
             {movie ? (
                 <>
@@ -122,6 +122,6 @@ export default function CardDetails(){
             ):(
                 <></>
             )}
-        </>
+        </div>
     )
 }
