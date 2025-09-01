@@ -6,7 +6,7 @@ export default function Watchlist() {
     <div className="flex flex-col h-full justify-end">
       <Navbar/>
       <div className="flex flex-col h-full justify-end">
-        <Footer/>
+        <Footer className="absolute bottom-0"/>
       </div>
     </div>
   )
