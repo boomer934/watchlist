@@ -15,6 +15,8 @@
     "@tanstack/react-query": "^5.85.6",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
+    "amqplib": "^0.10.9",
+    "animate.css": "^4.1.1",
     "axios": "^1.11.0",
     "framer-motion": "^12.23.12",
     "motion": "^12.23.12",
