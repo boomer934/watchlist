@@ -100,12 +100,16 @@ export const getMovies = async (filterBy = "popular",pageId) => {
   }
 };
 
-export const toProfileOrLogin = (navigate,token)=>{
-    if(!token){
-        alert("Devi essere loggato per vedere il tuo profilo")
-        navigate("/login")
+export const toProfileOrLogin = (navigate) => {
+    const token = localStorage.getItem("token");
+
+    if (!token || token === "" || token === "undefined" || token === "null") {
+        alert("Devi essere loggato per vedere il tuo profilo");
+        navigate("/login");
+        return;
     }
-    else navigate("/profile")
+
+    navigate("/profile");
 }
 
 export const searchMovies = async (query, pageId = 1) => {
