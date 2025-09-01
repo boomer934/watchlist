@@ -88,10 +88,10 @@ export const redirectToProvider = (provider, movieTitle) => {
     // navigate(url);
 };
 
-export const getMovies = async (filterBy = "popular") => {
+export const getMovies = async (filterBy = "popular",pageId) => {
   try {
     const res = await axios.get(
-      `https://api.themoviedb.org/3/movie/${filterBy}?language=en`,
+      `https://api.themoviedb.org/3/movie/${filterBy}?language=en?&page=${pageId}`,
       {
         params: { api_key: "ae7e3d3ba153dd817538a94cd60ac92e" },
       }
@@ -110,3 +110,22 @@ export const toProfileOrLogin = (navigate,token)=>{
     }
     else navigate("/profile")
 }
+
+export const searchMovies = async (query, pageId = 1) => {
+  try {
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/search/movie`,
+      {
+        params: { 
+          api_key: "ae7e3d3ba153dd817538a94cd60ac92e",
+          query,
+          page: pageId
+        }
+      }
+    );
+    return res.data || [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};

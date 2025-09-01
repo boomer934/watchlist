@@ -23,17 +23,16 @@ export default function Home(){
         error,
         status
     }=useQuery({
-        queryKey:["AllMovies",filterBy],
-        queryFn:()=>getMovies(filterBy),
-        refetchOnWindowFocus:false,
+        queryKey:["AllMovies",filterBy,movies,pageId],
+        queryFn:()=>getMovies(filterBy,pageId),
     })
 
       useEffect(() => {
             if (queryMovies) {
-                console.log(queryMovies);
-            setMovies(queryMovies.results);
+                console.log(queryMovies); 
+                setMovies(queryMovies);
             }
-        }, [queryMovies]);
+        }, [queryMovies,pageId]);
 
         useEffect(()=>{
             console.log(pageId)
@@ -45,7 +44,7 @@ export default function Home(){
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
             <div 
             className="relative h-full md:grid md:grid-cols-2 md:gap-2 md:grid-flow-row lg:grid-cols-3 lg:gap-2">
-                {movies?.map((movie) => (
+                {movies?.results?.map((movie) => (
                     <Card movie={movie} key={movie.id + movie.title} />
                 ))}
             </div>

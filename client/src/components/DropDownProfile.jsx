@@ -10,7 +10,7 @@ export default function DropDownProfile(){
             <ul className=" flex flex-col gap-4">
                 {/* <li>Logout</li> */}
                 <li onClick={()=>{toProfileOrLogin(navigate,token)}}>Profile</li>
-                <li onClick={()=>navigate("/home")}>Home</li>
+                <li onClick={()=>navigate("/home/page/1")}>Home</li>
             </ul>
         </div>
       </>
