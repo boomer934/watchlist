@@ -40,7 +40,7 @@ export default function Home(){
     return(
         <div className="flex flex-col h-full justify-end">
             <Navbar></Navbar>
-            <SearchBar movieTitle={movieTitle} setMovieTitle={setMovieTitle}/>
+            <SearchBar/>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy}></Filter>
             <div 
             className="relative h-full md:grid md:grid-cols-2 md:gap-2 md:grid-flow-row xl:grid-cols-3 xl:gap-2">

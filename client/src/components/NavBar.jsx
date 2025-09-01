@@ -30,19 +30,19 @@ export default function Navbar(){
                             {location.pathname === "/login" || location.pathname === "/register" ? (
                                 <></> 
                             ) : userName ? (
-                                <p
-                                className="bg-red-500  rounded-xl p-2 py-1"
+                                <button
+                                className=" rounded-xl p-2 py-1 focus:shadow-lg focus:shadow-gray-400 hover:shadow-md hover:shadow-gray-400 hover:scale-110 focus:scale-110 transform duration-100 ease-linear"
                                 onClick={() => setIsOpen((prev) => !prev)}
                                 >
                                     <span className=" text-nowrap">Benvenuto {userName}</span>
-                                </p>
+                                </button>
                             ) : (
-                                <p
-                                className="bg-red-500  rounded-xl p-2"
+                                <button
+                                className=" rounded-xl p-2 py-1 focus:shadow-lg focus:shadow-gray-400 hover:shadow-md hover:shadow-gray-400 hover:scale-110 focus:scale-110 transform duration-100 ease-linear"
                                 onClick={() => setIsOpen((prev) => !prev)}
                                 >
                                     <span className=" text-nowrap">Benvenuto Ospite</span>
-                                </p>
+                                </button>
                             )}
                         </div>
                         </>

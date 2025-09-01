@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useContext, useEffect } from "react"
-import { OpenStateContext,MoviesContext } from "../App"
+import { OpenStateContext,MoviesContext,MovieTitleContext } from "../App"
 import AutoSuggestion from "./AutoSuggestion"
 import CloseAutoSuggestion from "./CloseAutoSuggestion"
 
-export default function SearchBar({movieTitle,setMovieTitle,pageId=1}){
+export default function SearchBar({pageId=1}){
     const {isOpenState,setIsOpenState} = useContext(OpenStateContext)
     const {movies,setMovies} = useContext(MoviesContext)
+    const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
     const navigate = useNavigate()
     const handleSubmit = () => {
         const res = axios.get("https://api.themoviedb.org/3/search/movie", {

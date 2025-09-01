@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 export default function BackToHome(){
     const navigate = useNavigate()
     const handleClick = () => {
-        navigate("/home")
+        navigate("/")
     }
     return(
         <div className="flex justify-center">
