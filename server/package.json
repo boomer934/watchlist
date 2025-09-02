@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Express backend per React + MySQL",
+  "description": "Express backend per React + MySQL con Vite",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
