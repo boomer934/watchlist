@@ -41,7 +41,6 @@ export default function Search() {
             <BackToHome/>
             {movies?.results?.map((movie)=>(<Card movie={movie} key={movie.id+movie.title}></Card>))}
             <PagesNavigation pageId={pageId} movieTitleParam={movieTitleParam}/>
-            <Footer/>
         </div>
     )
 }

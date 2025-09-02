@@ -125,7 +125,7 @@ export default function CardDetails(){
                                 }
                             </div>
                         </div>
-                        <Footer/>
+                        
                     </div>
                 </>
             ):(

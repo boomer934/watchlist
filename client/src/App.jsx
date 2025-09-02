@@ -8,7 +8,7 @@ import CardDetails from './components/CardDetails'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Navigate } from 'react-router-dom'
 import Watchlist from './pages/Watchlist'
-
+import Footer from './components/Footer'
 const queryClient = new QueryClient()
 const UserContext = createContext()
 const MovieTitleContext = createContext()
@@ -33,16 +33,21 @@ function App() {
               <OpenStateContext.Provider value={{isOpenState,setIsOpenState}}>
                   <UserNameContext.Provider value={{userName,setUserName}}>
                     <Router>
-                        <Routes>
-                          <Route path='/' element={<Navigate to={'/home/page/1'}/>}/>
-                          <Route path='/register' element={<Register/>}/>
-                          <Route path='/login' element={<Login/>}/>
-                          <Route path='/home/page/:pageId' element={<Home/>}/>
-                          <Route path='/home/search/:movieTitleParam/:pageId' element={<Search/>}/>
-                          <Route path='/home/watchlist' element={<Watchlist/>}/>
-                          <Route path={`/home/search/movie/:id`} element={<CardDetails/>}/>
-                        </Routes>
-                      </Router>
+                      <div className="flex flex-col min-h-screen">
+                        <main className="flex-grow">
+                          <Routes>
+                            <Route path='/' element={<Navigate to={'/home/page/1'}/>}/>
+                            <Route path='/register' element={<Register/>}/>
+                            <Route path='/login' element={<Login/>}/>
+                            <Route path='/home/page/:pageId' element={<Home/>}/>
+                            <Route path='/home/search/:movieTitleParam/:pageId' element={<Search/>}/>
+                            <Route path='/home/watchlist' element={<Watchlist/>}/>
+                            <Route path={`/home/search/movie/:id`} element={<CardDetails/>}/>
+                          </Routes>
+                        </main>
+                        <Footer /> {/* 👈 sempre in fondo */}
+                      </div>
+                    </Router>
                   </UserNameContext.Provider>
               </OpenStateContext.Provider>
             </MovieContext.Provider>

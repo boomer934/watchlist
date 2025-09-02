@@ -49,7 +49,6 @@ export default function Home(){
                 ))}
             </div>
             <PagesNavigation pageId={pageId}/>
-            <Footer/>
         </div>
     )
 }

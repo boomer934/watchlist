@@ -4,12 +4,16 @@ import { useNavigate } from 'react-router-dom'
 import { handleRedirect,deleteFilm } from '../helper/handlers'
 import { useContext,useState } from 'react'
 import { MovieTitleContext } from '../App'
-export default function WatchlistCards({ location,filter="tutti",elimina=false }) {
+import { Delete , PenSquareIcon } from 'lucide-react'
+export default function WatchlistCards({ location,filter="tutti",elimina=false, aggiorna=false }) {
     
     const navigate=useNavigate()
     const [eliminato,setEliminato]=useState(false)
+    const [aggiornato , setAggiornato] = useState(false);
     const {movieTitle,setMovieTitle}=useContext(MovieTitleContext)
     const [movieId, setMovieId] = useState(null);
+    
+
     const{
         error,
         isError,
@@ -26,7 +30,7 @@ export default function WatchlistCards({ location,filter="tutti",elimina=false }
 
     return (
         <>
-        <div className='grid grid-flow-row grid-cols-3 gap-3 p-3'>
+        <div className='grid grid-flow-row grid-cols-3 md:grid-cols-5 gap-3 p-3'>
             {isLoading &&(
                 <div className=" w-[140px] h-[200px] bg-gray-400/50 p-3 m-3 rounded-md flex justify-center items-center">
                 <div className="w-16 h-16 border-b-2 border-black animate-spin rounded-full"></div>
@@ -35,12 +39,21 @@ export default function WatchlistCards({ location,filter="tutti",elimina=false }
             {queryMovies?.map((movie) => (
             <div className='relative'>
             {elimina &&(
+                <>
                 <button
                 onClick={()=>deleteFilm(movie.db_id,eliminato,setEliminato)}
-                className='absolute text-[15px] p-2 h-[37px] w-[37px] top-1 right-1 text-white text-2xl bg-red-500 rounded-full text-center'>
-                    x
+                className='absolute text-[15px] p-2 h-[37px] w-[37px] top-1 right-1 text-white text-2xl  rounded-full text-center'>
+                    <Delete size={25} className=' bg-red-500 p-1 rounded-full'/>
                 </button>
+                </>
             )}
+            {aggiorna &&(
+                <button
+                onClick={()=>{}}
+                className='absolute text-[15px] p-2 h-[37px] w-[37px] top-1 right-1 text-white text-2xl  rounded-full text-center'>
+                    <PenSquareIcon size={25} className=' bg-green-400 p-1 rounded-full'/>
+                </button>
+            ) }
             <img 
             key={movie.id+movie.original_movie_id} 
             onClick={()=>handleRedirect(movie,navigate,location)}

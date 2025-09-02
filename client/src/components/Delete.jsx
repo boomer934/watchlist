@@ -1,10 +1,22 @@
 import React from 'react'
+import  {Trash2} from 'lucide-react'
 
-export default function Delete({elimina,setElimina}) {
+export default function Delete({elimina,setElimina,aggiorna,setAggiorna}) {
+
+  const handleClick = () => {
+    setElimina(!elimina)
+    if (aggiorna) setAggiorna(prev=>!prev)
+  }
+
   return (
-    <button onClick={() => setElimina(!elimina)}
-    className='text-white h-[45px] p-1 bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center scale-80 hover:scale-100 transition ease-in-out duration-300'>
-        Elimina
+    <>
+    {elimina && aggiorna &&( setAggiorna(prev=>!prev))}
+    <button
+    onClick={handleClick}
+    className="flex items-center justify-center h-[44px] w-[44px] bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 text-white rounded-lg transition-transform duration-200 hover:scale-105"
+    >
+      <Trash2 size={20} />
     </button>
+    </>
   )
 }
