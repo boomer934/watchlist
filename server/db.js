@@ -1,14 +1,13 @@
 const mysql = require('mysql2');
 
-// Configura la connessione
+// Usa variabili d'ambiente per deploy, altrimenti fallback in locale
 const db = mysql.createConnection({
-  host: 'localhost',     // o l'indirizzo del tuo server DB
-  user: 'root',          // il tuo utente MySQL
-  password: '',  // la tua password MySQL
-  database: 'watchlist_db'   // il nome del database da usare
+  host: process.env.MYSQLHOST || 'localhost',
+  user: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || '',
+  database: process.env.MYSQLDATABASE || 'watchlist_db',
 });
 
-// Connetti al DB
 db.connect((err) => {
   if (err) {
     console.error('Errore connessione MySQL:', err);
@@ -17,19 +16,13 @@ db.connect((err) => {
   }
 });
 
-const executeQuery = async (query,param=[])=>{
-    return await new Promise((resolve,reject)=>{
-        const result = db.query(query,param,(err,result)=>{
-            if(err){
-                return reject(new Error())
-            }
-            resolve(result)
-        })
-        return result
-    })
-}
+const executeQuery = async (query, params = []) => {
+  return new Promise((resolve, reject) => {
+    db.query(query, params, (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
+    });
+  });
+};
 
-module.exports = {
-  db,
-  executeQuery
-}
+module.exports = { db, executeQuery };
