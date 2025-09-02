@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { useState,useContext } from 'react'
 import { UserContext, UserNameContext } from '../App'
 
-
-
 export default function FormLogin() {
   const {user,setUser} = useContext(UserContext)
   const {userName,setUserName} = useContext(UserNameContext)
@@ -30,39 +28,53 @@ export default function FormLogin() {
   }
 
   return (
-    <div className="flex flex-col items-center h-full mt-8">
-      <h1 className="text-4xl p-2.5">Accedi</h1>
-      {invalid && <p className="text-red-500">Email o password errati</p>}
-      <form onSubmit={handleSubmit} className="w-full flex items-start justify-center flex-col h-auto rounded-3xl p-6 pt-0">
-        <label htmlFor="email" className="self-start">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          value={user?.email}
-          onChange={({ target }) => setUser({ ...user, email: target.value })}
-          placeholder="Inserisci la tua email..."
-          className="focus:outline-0 p-1 my-2 outline-1 outline-gray-500 rounded-3xl w-full"
-        />
-        <label htmlFor="password" className="self-start">
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          value={user?.password}
-          onChange={({ target }) => setUser({ ...user, password: target.value })}
-          placeholder="Inserisci la tua password..."
-          className="focus:outline-0 p-1 my-2 outline-1 outline-gray-500 rounded-3xl w-full"
-        />
-        <input
-          type="submit"
-          value="Accedi →"
-          className="bg-amber-500 w-full md:w-1/3 h-8 cursor-pointer rounded-md text-white font-semibold"
-        />
-      </form>
-      <p>Non hai un account? <span className="text-red-500 hover:cursor-pointer underline underline-offset-4 focus:text-red-600" onClick={() => navigate("/register")}>Registrati</span></p>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-amber-200 to-amber-50 px-4">
+      <div className="bg-white shadow-lg rounded-3xl w-full max-w-md p-8 md:p-12 flex flex-col">
+        <h1 className="text-4xl font-bold text-center text-amber-600 mb-6">Accedi</h1>
+        {invalid && <p className="text-red-500 text-center mb-4">Email o password errati</p>}
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="flex flex-col">
+            <label htmlFor="email" className="mb-1 font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={user?.email}
+              onChange={({ target }) => setUser({ ...user, email: target.value })}
+              placeholder="Inserisci la tua email..."
+              className="p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label htmlFor="password" className="mb-1 font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={user?.password}
+              onChange={({ target }) => setUser({ ...user, password: target.value })}
+              placeholder="Inserisci la tua password..."
+              className="p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition"
+            />
+          </div>
+
+          <input
+            type="submit"
+            value="Accedi →"
+            className="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 rounded-xl cursor-pointer transition duration-200"
+          />
+        </form>
+
+        <p className="text-center mt-6 text-gray-600">
+          Non hai un account?{" "}
+          <span
+            className="text-amber-600 font-medium hover:underline cursor-pointer"
+            onClick={() => navigate("/register")}
+          >
+            Registrati
+          </span>
+        </p>
+      </div>
     </div>
   )
 }
