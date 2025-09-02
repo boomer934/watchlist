@@ -21,8 +21,8 @@ export default function Watchlist() {
         <Delete elimina={elimina} setElimina={setElimina}/>
       </div>
       {filter === "tutti" && <WatchlistCards location={location} elimina={elimina} />}
-      {filter === "da vedere" && <WatchlistCards location={location} filter={filter} />}
-      {filter === "visto" && <WatchlistCards location={location} filter={filter} />}
+      {filter === "da vedere" && <WatchlistCards location={location} filter={filter} elimina={elimina} />}
+      {filter === "visto" && <WatchlistCards location={location} filter={filter} elimina={elimina}/>}
       <Footer className="absolute bottom-0"/>
     </div>
   )

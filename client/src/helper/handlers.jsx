@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const handleClick = async (movie,setAdd,option) => {
+export const handleClick = async (movie,setAdd,option="da vedere") => {
     console.log("Invio al backend:", movie,option);
     console.log("Token:", localStorage.getItem("token"));
     const token = localStorage.getItem("token");
@@ -170,9 +170,23 @@ export const getWatchlistMovies = async (movieTitle,filter) => {
     console.log("filter:", filter);
     console.log("Watchlist API:", response);
     if(filter !== "tutti") return response.data.filter((movie) => movie.status === filter)
-    return response.data || []; // assicuriamoci che sia sempre un array
+    return response.data || []; 
   } catch (error) {
     console.error(error.response?.data?.message || error.message);
-    return []; // fallback a array vuoto
+    return []; 
+  }
+}
+
+export const deleteFilm = async (movieId,eliminato=false,setEliminato) => {
+  console.log("movieId:", movieId);
+  setEliminato(!eliminato)
+  try {
+    const response = await axios.delete(`http://localhost:5000/watchlist/${movieId}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    });
+    return response.data || []; 
+  } catch (error) {
+    console.error(error.response?.data?.message || error.message);
+    return []; 
   }
 }
