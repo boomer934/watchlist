@@ -5,14 +5,14 @@ import { handleRedirect,deleteFilm } from '../helper/handlers'
 import { useContext,useState } from 'react'
 import { MovieTitleContext } from '../App'
 import { Delete , PenSquareIcon } from 'lucide-react'
-export default function WatchlistCards({ location,filter="tutti",elimina=false, aggiorna=false }) {
+
+
+export default function WatchlistCards({ location,filter="tutti",elimina=false, aggiorna=false,editMovie , setEditMovie }) {
     
     const navigate=useNavigate()
     const [eliminato,setEliminato]=useState(false)
     const [aggiornato , setAggiornato] = useState(false);
     const {movieTitle,setMovieTitle}=useContext(MovieTitleContext)
-    const [movieId, setMovieId] = useState(null);
-    
 
     const{
         error,
@@ -20,10 +20,11 @@ export default function WatchlistCards({ location,filter="tutti",elimina=false, 
         isLoading,
         data:queryMovies,
     }=useQuery({
-        queryKey:["WatchlistMovies",filter,eliminato],
+        queryKey:["WatchlistMovies",filter,eliminato,editMovie],
         queryFn:()=>getWatchlistMovies(movieTitle,filter),
         refetchInterval: elimina ? 1000 : false
     })
+
 
     if (isError) return <p>Errore: {error.message}</p>
     console.log("queryMovies:", queryMovies)
@@ -49,7 +50,9 @@ export default function WatchlistCards({ location,filter="tutti",elimina=false, 
             )}
             {aggiorna &&(
                 <button
-                onClick={()=>{}}
+                onClick={()=> {
+                    setEditMovie(movie)
+                }}
                 className='absolute text-[15px] p-2 h-[37px] w-[37px] top-1 right-1 text-white text-2xl  rounded-full text-center'>
                     <PenSquareIcon size={25} className=' bg-green-400 p-1 rounded-full'/>
                 </button>

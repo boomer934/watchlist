@@ -190,3 +190,22 @@ export const deleteFilm = async (movieId,eliminato=false,setEliminato) => {
     return []; 
   }
 }
+
+export const handleSubmit = async(e,status,editMovie) =>{
+  console.log(editMovie.db_id)
+  e.preventDefault()
+  try {
+    const response = await axios.put(
+      `http://localhost:5000/watchlist/${editMovie.db_id}`,
+      { status },
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    )
+    if(response.status === 200) alert("Stato aggiornato con successo")
+    return response.data || [];
+    } catch (error) {
+    console.error("Errore nell'update dello stato:", error);
+    throw error;
+    }
+}
