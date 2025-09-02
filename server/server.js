@@ -5,7 +5,8 @@ const router_post = require('./Router/post')
 const router_get = require('./Router/get')
 const router_delete = require('./Router/delete')
 const router_put = require('./Router/put')
-const port = 5000
+const port = process.env.PORT || 5000;
+
 
 
 app.use(express.json())
