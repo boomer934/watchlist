@@ -1,29 +1,31 @@
 const express = require('express');
-const path = require('path');
-const cors = require('cors');
+const http = require('http');
+const {Server} = require('socket.io');
+
+// Router API
 const router_post = require('./Router/post');
 const router_get = require('./Router/get');
 const router_delete = require('./Router/delete');
 const router_put = require('./Router/put');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
+
+const server  = http.createServer(app);
+const io = new Server(server,{cors:{origin:"http://localhost:5173"}})
+io.on("connection", socket =>{
+    console.log("Connected")
+})
+
 
 app.use(express.json());
-app.use(cors());
 
-// Montaggio router API (opzionale prefisso /api)
 app.use('/', router_post);
 app.use('/', router_get);
 app.use('/', router_delete);
 app.use('/', router_put);
 
-// Servire frontend React dalla dist (compatibile Express 5)
-app.use(express.static(path.join(__dirname, 'dist')));
-app.get('/:path(*)', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

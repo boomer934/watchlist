@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Navigate } from 'react-router-dom'
 import Watchlist from './pages/Watchlist'
 import Footer from './components/Footer'
+import RealTimeChat from './components/RealTimeChat'
 const queryClient = new QueryClient()
 const UserContext = createContext()
 const MovieTitleContext = createContext()
@@ -43,6 +44,7 @@ function App() {
                             <Route path='/home/search/:movieTitleParam/:pageId' element={<Search/>}/>
                             <Route path='/home/watchlist' element={<Watchlist/>}/>
                             <Route path={`/home/search/movie/:id`} element={<CardDetails/>}/>
+                            <Route path='/chat' element={<RealTimeChat/>}/>
                           </Routes>
                         </main>
                         <Footer /> {/* 👈 sempre in fondo */}

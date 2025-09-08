@@ -1,19 +1,11 @@
 const mysql = require('mysql2');
+require('dotenv').config();
 
-// Usa variabili d'ambiente per deploy, altrimenti fallback in locale
 const db = mysql.createConnection({
-  host: process.env.MYSQLHOST || 'localhost',
-  user: process.env.MYSQLUSER || 'root',
-  password: process.env.MYSQLPASSWORD || '',
-  database: process.env.MYSQLDATABASE || 'watchlist_db',
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error('Errore connessione MySQL:', err);
-  } else {
-    console.log('Connesso a MySQL!');
-  }
+  host:'localhost',
+  user:'root',
+  password:'',
+  database:'watchlist_db'
 });
 
 const executeQuery = async (query, params = []) => {
