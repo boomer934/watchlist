@@ -1,8 +1,9 @@
 import { useEffect, useState, useContext } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import DropDownProfile from "./DropDownProfile"
 import { UserContext, UserNameContext } from "../App"
 export default function Navbar(){
+    const navigate = useNavigate()
     const [isOpen , setIsOpen] = useState(false)
     const {user,setUser} = useContext(UserContext)
     const {userName,setUserName} = useContext(UserNameContext)
@@ -38,10 +39,10 @@ export default function Navbar(){
                                 </button>
                             ) : (
                                 <button
-                                className=" rounded-xl p-2 py-1 focus:shadow-lg focus:shadow-gray-400 hover:shadow-md hover:shadow-gray-400 hover:scale-110 focus:scale-110 transform duration-100 ease-linear"
-                                onClick={() => setIsOpen((prev) => !prev)}
+                                onClick={() => navigate("/login")}
+                                className=" rounded-xl p-2 py-1 focus:shadow-lg focus:shadow-gray-400 hover:shadow-md hover:shadow-gray-400 hover:scale-110 focus:scale-110 transform duration-100 ease-linear  text-nowrap bg-gray-700 hover:bg-gray-600 cursor-pointer"
                                 >
-                                    <span className=" text-nowrap">Benvenuto Ospite</span>
+                                    Login
                                 </button>
                             )}
                         </div>

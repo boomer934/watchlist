@@ -17,7 +17,7 @@ export default function RegisterForm({ user, setUser }) {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-amber-200 to-amber-50 px-4">
-      <div className="bg-white shadow-lg rounded-3xl w-full max-w-md p-8 md:p-12 flex flex-col">
+      <div className="bg-white shadow-lg rounded-3xl w-full max-w-md p-8 md:p-12 sm:my-10 flex flex-col">
         <h1 className="text-4xl font-bold text-center text-amber-600 mb-6">Registrati</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

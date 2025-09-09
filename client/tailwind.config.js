@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'tablet': '768px',   // custom breakpoint
+        'xs': '450px',   // custom breakpoint
         'desktop': '1280px', // custom breakpoint
       },
     },
