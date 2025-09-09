@@ -9,7 +9,7 @@ export default function RegisterForm({ user, setUser }) {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}`, user);
       setUser({ name: "", surname: "", email: "", password: "" });
-      navigate("/login");
+      navigate(`${import.meta.env.VITE_API_URL}/login`);
     } catch (error) {
       console.error(error);
     }
