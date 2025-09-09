@@ -41,7 +41,7 @@ export default function Chat() {
     <>
         {realTimeChat &&(
             <div className='absolute w-full h-full bg-black/25 flex justify-center items-start'>
-                <div className="fixed mt-[150px] z-[500] w-[400px] h-[600px] bg-white rounded-xl flex flex-col justify-end">
+                <div className="fixed mt-[150px] z-[500] w-[300px] h-[500px] bg-white rounded-xl flex flex-col justify-end">
                     <div className=" flex flex-col overflow-y-scroll flex-1">
                         {messages && messages.map((mess,index)=>(
                             <p key={index}
