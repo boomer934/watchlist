@@ -7,7 +7,7 @@ export default function RegisterForm({ user, setUser }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/register", user);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}`, user);
       setUser({ name: "", surname: "", email: "", password: "" });
       navigate("/login");
     } catch (error) {
