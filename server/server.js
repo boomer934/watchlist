@@ -1,24 +1,14 @@
-const express = require('express');
-const http = require('http');
-const {Server} = require('socket.io');
+const {server , app, express} = require('./webSocket');
+const cors = require('cors');
+const port = 5000;
+
+app.use(cors())
 
 // Router API
 const router_post = require('./Router/post');
 const router_get = require('./Router/get');
 const router_delete = require('./Router/delete');
 const router_put = require('./Router/put');
-
-const app = express();
-const port = 5000;
-
-const server  = http.createServer(app);
-const io = new Server(server,{cors:{origin:"http://localhost:5173"}})
-io.on("connection", (socket) =>{
-  socket.join("room1")
-  socket.emit("message","connesso alla room 1")
-  console.log("Connected")
-})
-
 
 app.use(express.json());
 

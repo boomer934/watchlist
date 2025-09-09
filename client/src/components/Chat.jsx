@@ -1,23 +1,36 @@
 import { io } from "socket.io-client";
 import { useContext, useEffect, useState } from 'react'
-import { RealTimeChatContext } from '../App'
+import { RealTimeChatContext, UserNameContext } from '../App'
 import { Search } from'lucide-react'
 
+const socket = io("http://localhost:5000");
 export default function Chat() {
     const {realTimeChat, setRealTimeChat} = useContext(RealTimeChatContext)
-    const [message,setMessage] = useState("")
+    const [message,setMessage] = useState({name:"",msg:""})
     const [messages,setMessages] = useState([])
-      useEffect(() => {
-    // Connessione al server
-    const socket = io("http://localhost:5000");
+    const {userName,setUserName} = useContext(UserNameContext)
 
+  useEffect(() => {
     socket.on("connect", () => {
-      socket.on("message",(data) => {
-        console.log(data)
-      })
+      console.log("Connesso al server:", socket.id);
     });
 
+    socket.on("chatMessages", (msg) => {
+      setMessages((prev) => [...prev,{name:msg.name,msg:msg.msg}]);
+    });
+
+    return () => {
+      socket.off("chatMessages");
+      socket.off("connect");
+    };
   }, []);
+
+
+  const handleSubmit = () => {
+    socket.emit("message", message);
+    setMessage({name:"",msg:""})
+  };
+
   return (
     <>
         {realTimeChat &&(
@@ -27,19 +40,19 @@ export default function Chat() {
                         {messages && messages.map((mess,index)=>(
                             <p key={index}
                             className="">
-                                {mess}
+                                {mess.name} : {mess.msg}
                             </p>
                         ))}
                     </div>
                     <div className=" bg-gray-300 w-full rounded-b-xl">
                         <input 
                         type="text"
-                        onKeyDown={(e)=>e.key === "Enter" && setMessages(prev=>[...prev,message])}
-                        value={message}
-                        onChange={(e)=>setMessage(e.target.value)} 
+                        onKeyDown={(e)=>e.key === "Enter" && handleSubmit()}
+                        value={message.msg}
+                        onChange={(e)=>setMessage({name:userName,msg:e.target.value})} 
                         className="w-[300px] h-[50px] bg-amber-400 m-6 mb-3"/>
                         <button 
-                        onClick={()=>setMessages(prev=>[...prev,message])}>
+                        onClick={()=>handleSubmit()}>
                             <Search/>
                         </button>
                     </div>
