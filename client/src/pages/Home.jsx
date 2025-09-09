@@ -9,6 +9,7 @@ import { getMovies } from "../helper/handlers"
 import Footer from "../components/Footer"
 import PagesNavigation from "../components/PagesNavigation"
 import { useParams } from "react-router-dom"
+import RealTimeChat from "../components/RealTimeChat"
 
 export default function Home(){
     const {pageId} = useParams()
@@ -48,6 +49,7 @@ export default function Home(){
                     <Card movie={movie} key={movie.id + movie.title} />
                 ))}
             </div>
+            <RealTimeChat />
             <PagesNavigation pageId={pageId}/>
         </div>
     )
