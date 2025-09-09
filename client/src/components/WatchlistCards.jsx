@@ -29,7 +29,7 @@ export default function WatchlistCards({ location, filter="tutti", elimina=false
             )}
 
             {queryMovies?.map((movie) => (
-                <div key={movie.id + movie.original_movie_id} className="relative flex justify-center">
+                <div key={movie.db_id} className="relative flex justify-center">
                     {elimina && (
                         <button
                             onClick={() => deleteFilm(movie.db_id, eliminato, setEliminato)}

@@ -62,7 +62,7 @@ export default function CardDetails(){
                                     name="selectState"
                                     value={option}
                                     onChange={(e)=>setOption(e.target.value)} 
-                                    className="z-10 mb-[12px] mr-5 bg-gray-300 focus:bg-gray-400/70 focus:scale-110 p-1 rounded-md min-h-[32px] transition ease-in-out duration-100">
+                                    className="z-10 mb-[12px] mr-5 bg-gray-200 focus:bg-gray-300 focus:shadow-2xl focus:scale-110 p-1 rounded-md min-h-[32px] transition ease-in-out duration-100">
                                         <option value="da vedere">da vedere</option>
                                         <option value="visto">visto</option>
                                     </select>

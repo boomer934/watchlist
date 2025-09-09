@@ -18,7 +18,7 @@ export default function Card({movie}){
 
     return(
         <>
-        {movie && movie.poster_path !== undefined && movie.poster_path !== null ? (
+        {movie && movie.poster_path !== null ? (
             <div 
             className="flex flex-row justify-start p-3 m-3 gap-4 h-[224px] rounded-md bg-gray-400/50 "
             onClick={()=>handleRedirect(movie,navigate,location)}>

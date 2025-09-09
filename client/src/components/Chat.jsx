@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import { RealTimeChatContext, UserNameContext } from '../App'
-import { Search } from'lucide-react'
+import { Send , X } from'lucide-react'
 
 const socket = io("http://localhost:5000");
 export default function Chat() {
@@ -9,6 +9,7 @@ export default function Chat() {
     const [message,setMessage] = useState({name:"",msg:""})
     const [messages,setMessages] = useState([])
     const {userName,setUserName} = useContext(UserNameContext)
+    const chatEnd = useRef(null)
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -26,7 +27,12 @@ export default function Chat() {
   }, []);
 
 
+  useEffect(() => {
+    chatEnd.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const handleSubmit = () => {
+    if(message.msg.trim() === "") return;
     socket.emit("message", message);
     setMessage({name:"",msg:""})
   };
@@ -39,25 +45,29 @@ export default function Chat() {
                     <div className=" flex flex-col overflow-y-scroll flex-1">
                         {messages && messages.map((mess,index)=>(
                             <p key={index}
-                            className="">
-                                {mess.name} : {mess.msg}
+                            className="odd:bg-red-100 even:bg-red-200 p-3 first:rounded-t-xl text-gray-800 w-full wrap-break-word">
+                                <span className="font-semibold">{mess.name}</span>: {mess.msg}
                             </p>
                         ))}
+                        <div className="fixed w-auto h-auto bg-black/25 self-end m-3 p-1 rounded-full cursor-pointer" onClick={()=>setRealTimeChat(false)}>
+                            < X/>
+                        </div>
+                        <div ref={chatEnd}/>
                     </div>
-                    <div className=" bg-gray-300 w-full rounded-b-xl">
+                    <div className="bg-red-50 w-full rounded-b-xl flex items-center p-2">
                         <input 
-                        type="text"
-                        onKeyDown={(e)=>e.key === "Enter" && handleSubmit()}
-                        value={message.msg}
-                        onChange={(e)=>setMessage({name:userName,msg:e.target.value})} 
-                        className="w-[300px] h-[50px] bg-amber-400 m-6 mb-3"/>
-                        <button 
-                        onClick={()=>handleSubmit()}>
-                            <Search/>
+                            type="text"
+                            onKeyDown={(e)=>e.key === "Enter" && handleSubmit()}
+                            value={message.msg}
+                            onChange={(e)=>setMessage({name:userName,msg:e.target.value})} 
+                            className="flex-1 h-[50px] px-3 rounded-2xl border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-300 focus:bg-white"
+                        />
+                        <button onClick={handleSubmit} className="ml-2 p-2 bg-red-500 rounded-lg text-white hover:bg-red-600">
+                            <Send/>
                         </button>
                     </div>
-                    
                 </div>
+                
             </div>
         )}
     </>

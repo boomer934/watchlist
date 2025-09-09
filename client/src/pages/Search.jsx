@@ -39,7 +39,7 @@ export default function Search() {
             <Navbar user={user} setUser={setUser}></Navbar>
             <SearchBar pageId={pageId}/>
             <BackToHome/>
-            {movies?.results?.map((movie)=>(<Card movie={movie} key={movie.id+movie.title}></Card>))}
+            {movies?.results?.filter((movie) => movie.poster_path !== null).map((movie)=>(<Card movie={movie} key={movie.id+movie.title}></Card>))}
             <PagesNavigation pageId={pageId} movieTitleParam={movieTitleParam}/>
         </div>
     )
