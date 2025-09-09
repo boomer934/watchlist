@@ -2,10 +2,7 @@ import React from 'react'
 import { Pencil } from 'lucide-react'
 
 export default function Update({ aggiorna , setAggiorna,elimina ,setElimina }) {
-    const handleClick = () => {
-    setAggiorna(prev=>!prev)
-    if (elimina) setElimina(prev=>!prev)
-  }
+    
   return (
     <>
     {aggiorna && elimina&&( setElimina(prev=>!prev))}
