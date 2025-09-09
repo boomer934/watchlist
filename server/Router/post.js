@@ -9,7 +9,6 @@ const router = express.Router()
 
 router.post("/register" , async(req,res)=>{
     try {
-        res.send(req.body)
         const {name,surname,email,password} = req.body
         const hashedPassword = await bcrypt.hash(password,10)
         if(await executeQuery("INSERT INTO User(name,surname,email,password) VALUES (?,?,?,?)",[name,surname,email,hashedPassword])){
