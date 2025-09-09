@@ -1,8 +1,19 @@
 const {server , app, express} = require('./webSocket');
 const cors = require('cors');
+const helmet = require('helmet')
 const PORT = process.env.PORT || 5000;
 
 app.use(cors())
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", 'https://watchlist-production-ead0.up.railway.app'],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'"]
+    }
+  })
+);
 
 // Router API
 const router_post = require('./Router/post');
