@@ -1,7 +1,12 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
-const db = mysql.createConnection(process.env.DB_URL);
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "watchlist_db"
+});
 
 db.connect(err => {
   if (err) {

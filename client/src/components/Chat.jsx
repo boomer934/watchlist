@@ -3,7 +3,7 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import { RealTimeChatContext, UserNameContext } from '../App'
 import { Send , X } from'lucide-react'
 
-const socket = io(`${import.meta.env.VITE_API_URL}`);
+const socket = io(`http://localhost:5000`);
 export default function Chat() {
     const {realTimeChat, setRealTimeChat} = useContext(RealTimeChatContext)
     const [message,setMessage] = useState({name:"",msg:""})
@@ -41,7 +41,7 @@ export default function Chat() {
     <>
         {realTimeChat &&(
             <div className='absolute w-full h-full bg-black/25 flex justify-center items-start'>
-                <div className="fixed mt-[150px] z-[500] w-[300px] h-[500px] bg-white rounded-xl flex flex-col justify-end">
+                <div className="fixed mt-[150px] sm:mt-[20px] sm:h-[350px] sm:w-[600px] z-[500] w-[300px] h-[500px] bg-white rounded-xl flex flex-col justify-end">
                     <div className=" flex flex-col overflow-y-scroll flex-1">
                         {messages && messages.map((mess,index)=>(
                             <p key={index}

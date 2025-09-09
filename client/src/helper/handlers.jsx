@@ -6,7 +6,7 @@ export const handleClick = async (movie,setAdd,option="da vedere") => {
     const token = localStorage.getItem("token");
     try {
         const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/watchlist`,
+        `http://localhost:4000/watchlist`,
         { movie,option },
         { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -150,7 +150,7 @@ export const handleLogout = async(user,setUser,userName,setUserName) =>{
     
     try {
         const token = localStorage.getItem("token")
-        const res = await axios.post(`${import.meta.env.VITE_API_URL}/logout`,{},{
+        const res = await axios.post(`http://localhost:4000/logout`,{},{
             headers : {Authorization : `Bearer ${token}`}
         })
         localStorage.clear()
@@ -164,7 +164,7 @@ export const handleLogout = async(user,setUser,userName,setUserName) =>{
 
 export const getWatchlistMovies = async (movieTitle,filter) => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/watchlist`, {
+    const response = await axios.get(`http://localhost:4000/watchlist`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     });
     console.log("filter:", filter);
@@ -181,7 +181,7 @@ export const deleteFilm = async (movieId,eliminato=false,setEliminato) => {
   console.log("movieId:", movieId);
   setEliminato(!eliminato)
   try {
-    const response = await axios.delete(`${import.meta.env.VITE_API_URL}/watchlist/${movieId}`, {
+    const response = await axios.delete(`http://localhost:4000/watchlist/${movieId}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     });
     return response.data || []; 
@@ -196,7 +196,7 @@ export const handleSubmit = async(e,status,editMovie) =>{
   e.preventDefault()
   try {
     const response = await axios.put(
-      `${import.meta.env.VITE_API_URL}/watchlist/${editMovie.db_id}`,
+      `http://localhost:4000/watchlist/${editMovie.db_id}`,
       { status },
       {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

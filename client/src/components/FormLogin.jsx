@@ -12,7 +12,7 @@ export default function FormLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, user)
+      const response = await axios.post(`http://localhost:4000/login`, user)
       console.log(response)
       localStorage.setItem("token", response.data.token)
       localStorage.setItem("name", response.data.name)
