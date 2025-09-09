@@ -4,7 +4,6 @@ const helmet = require('helmet')
 const PORT = process.env.PORT || 5000;
 
 app.use(cors())
-const helmet = require('helmet');
 
 app.use(
   helmet.contentSecurityPolicy({
