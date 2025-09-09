@@ -42,7 +42,7 @@ export default function AutoSuggestion({isOpenState,setIsOpenState}){
     },[movieTitle])
 
     return(
-        <div className="realtive flex justify-center">
+        <div className="relative flex justify-center">
             {isOpenState && movieTitle && moviesSuggestion !== undefined ? (
                 <div className=" absolute h-[224px] w-[180px] sm:w-[300px] top-[-20px] rounded-xl p-4 overflow-y-scroll overflow-x-hidden bg-gray-400 shadow-md z-50">
                     <CloseAutoSuggestion/>
