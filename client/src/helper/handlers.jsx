@@ -146,9 +146,10 @@ export const searchMovies = async (query, pageId = 1) => {
   }
 };
 
-export const handleLogout = async(user,setUser,userName,setUserName) =>{
+export const handleLogout = async(user,setUser,userName,setUserName,setIsOpen) =>{
     
     try {
+        setIsOpen(false)
         const token = localStorage.getItem("token")
         const res = await axios.post(`${import.meta.env.VITE_API_URL}/logout`,{},{
             headers : {Authorization : `Bearer ${token}`}

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import { UserContext, UserNameContext } from "../App"
 import 'animate.css'
-export default function DropDownProfile({isOpen}){
+export default function DropDownProfile({isOpen , setIsOpen}){
   const {user,setUser} = useContext(UserContext)
   const {userName,setUserName} = useContext(UserNameContext)
   const token = localStorage.getItem("token")
@@ -19,7 +19,7 @@ export default function DropDownProfile({isOpen}){
                 {/* <li>Logout</li> */}
                 <li onClick={()=>{toProfileOrLogin(navigate,token)}}>Watchlist</li>
                 <li onClick={()=>navigate("/home/page/1")}>Home</li>
-                <li onClick={()=>handleLogout(user,setUser,userName,setUserName)}>Logout</li>
+                <li onClick={()=>handleLogout(user,setUser,userName,setUserName,setIsOpen)}>Logout</li>
             </ul>
         </div>
       </>

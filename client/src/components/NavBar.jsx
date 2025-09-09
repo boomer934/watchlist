@@ -47,7 +47,7 @@ export default function Navbar(){
                             )}
                         </div>
                         </>
-                    {isOpen && <DropDownProfile isOpen={isOpen}/>}
+                    {isOpen && <DropDownProfile isOpen={isOpen} setIsOpen={setIsOpen}/>}
                     
                     </div>
                 </div>
