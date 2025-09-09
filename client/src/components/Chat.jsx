@@ -3,7 +3,7 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import { RealTimeChatContext, UserNameContext } from '../App'
 import { Send , X } from'lucide-react'
 
-const socket = io(`${process.meta.env.VITE_API_URL}`);
+const socket = io(`${import.meta.env.VITE_API_URL}`);
 export default function Chat() {
     const {realTimeChat, setRealTimeChat} = useContext(RealTimeChatContext)
     const [message,setMessage] = useState({name:"",msg:""})
