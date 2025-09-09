@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 
 const server  = http.createServer(app);
-const io = new Server(server,{cors:{origin:`${process.env.VITE_API_URL}`}});
+const io = new Server(server,{cors:{origin:`${process.env.VITE_FRONTEND_API_URL}`}});
 io.on("connection", (socket) =>{
   socket.join("global")
   socket.emit("message","connesso alla global room")
