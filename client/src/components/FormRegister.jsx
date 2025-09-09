@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 export default function RegisterForm({ user, setUser }) {
   const navigate = useNavigate();
