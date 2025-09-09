@@ -9,6 +9,14 @@ const db = mysql.createConnection({
   port: process.env.DB_PORT
 });
 
+db.connect(err => {
+  if (err) {
+    console.error('Errore connessione MySQL:', err);
+  } else {
+    console.log('Connessione MySQL stabilita!');
+  }
+});
+
 const executeQuery = async (query, params = []) => {
   return new Promise((resolve, reject) => {
     db.query(query, params, (err, results) => {
