@@ -8,6 +8,7 @@ import { use } from 'react'
 import Delete from '../components/Delete'
 import Update from '../components/Update'
 import EditMoviePopUp from '../components/EditMoviePopUp'
+import RealTimeChat from '../components/RealTimeChat'
 export default function Watchlist() {
   const [filter, setFilter] = useState("tutti")
   const [elimina,setElimina] = useState(false)
@@ -36,5 +37,6 @@ export default function Watchlist() {
         <EditMoviePopUp editMovie={editMovie} setEditMovie={setEditMovie}/>
       )}
     </div>
+    
   )
 }

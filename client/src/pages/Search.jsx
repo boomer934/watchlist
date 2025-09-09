@@ -9,6 +9,7 @@ import Footer from "../components/Footer"
 import PagesNavigation from "../components/PagesNavigation"
 import { useQuery } from "@tanstack/react-query"
 import { searchMovies } from "../helper/handlers"
+import RealTimeChat from "../components/RealTimeChat"
 export default function Search() {
     
     const {movieTitleParam,pageId} = useParams()
@@ -41,6 +42,7 @@ export default function Search() {
             <BackToHome/>
             {movies?.results?.filter((movie) => movie.poster_path !== null).map((movie)=>(<Card movie={movie} key={movie.id+movie.title}></Card>))}
             <PagesNavigation pageId={pageId} movieTitleParam={movieTitleParam}/>
+            <RealTimeChat/>
         </div>
     )
 }
