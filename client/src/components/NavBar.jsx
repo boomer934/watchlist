@@ -20,9 +20,11 @@ export default function Navbar(){
         <>
             <nav className="bg-gray-900 text-white shadow-md h-[8vh] sm:h-[80px] p-4">
                 <div className="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="h-full flex justify-between items-center">
+                    <div className="h-full flex justify-between items-center cursor-pointer">
                     {/* Logo / Titolo */}
-                    <div className="flex-shrink-0">
+                    <div 
+                    onClick={() => navigate("/home/page/1")}
+                    className="flex-shrink-0">
                         <h1 className="text-[21px] font-bold tracking-wide text-red-500 pr-1.5">WATCHLIST</h1>
                     </div>
                     
