@@ -36,7 +36,7 @@ export const handleRedirect = (movie, navigate,location) => {
   console.log("Film selezionato:", movie);
     axios.get(url, {
         params: {
-            api_key: "ae7e3d3ba153dd817538a94cd60ac92e",
+            api_key: `${import.meta.env.VITE_API_KEY}`,
         },
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -56,7 +56,7 @@ export const getWatchProviders = async(movieId)=>{
     try {
         const res = await axios.get(` https://api.themoviedb.org/3/movie/${movieId}/watch/providers`,
             {
-                params : {api_key: "ae7e3d3ba153dd817538a94cd60ac92e"},
+                params : {api_key: `${import.meta.env.VITE_API_KEY}`},
                 headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
             }
         )
@@ -105,7 +105,7 @@ export const getMovies = async (filterBy = "popular",pageId) => {
     const res = await axios.get(
       `https://api.themoviedb.org/3/movie/${filterBy}?language=en?&page=${pageId}`,
       {
-        params: { api_key: "ae7e3d3ba153dd817538a94cd60ac92e" },
+        params: { api_key: `${import.meta.env.VITE_API_KEY}` },
       }
     );
     return res.data || []
@@ -133,7 +133,7 @@ export const searchMovies = async (query, pageId = 1) => {
       `https://api.themoviedb.org/3/search/movie`,
       {
         params: { 
-          api_key: "ae7e3d3ba153dd817538a94cd60ac92e",
+          api_key: `${import.meta.env.VITE_API_KEY}`,
           query,
           page: pageId
         }
