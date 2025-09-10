@@ -37,7 +37,7 @@ function App() {
                   <UserNameContext.Provider value={{userName,setUserName}}>
                     <RealTimeChatContext.Provider value={{realTimeChat,setRealTimeChat}}>
                       <Router>
-                        <div className="flex flex-col min-h-screen">
+                        <div className="flex flex-col min-h-screen overflow-x-hidden">
                           <main className="flex-grow">
                             <Routes>
                               <Route path='/' element={<Navigate to={'/home/page/1'}/>}/>
