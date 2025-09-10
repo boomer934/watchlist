@@ -191,7 +191,7 @@ export const deleteFilm = async (movieId,eliminato=false,setEliminato) => {
   }
 }
 
-export const handleSubmit = async(e,status,editMovie) =>{
+export const handleSubmit = async(e,status,editMovie,setUpdateStatus,updateStatus) =>{
   console.log(editMovie.db_id)
   e.preventDefault()
   try {
@@ -202,7 +202,7 @@ export const handleSubmit = async(e,status,editMovie) =>{
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }
     )
-    if(response.status === 200) alert("Stato aggiornato con successo")
+    if(response.status === 200) setUpdateStatus(!updateStatus)
     return response.data || [];
     } catch (error) {
     console.error("Errore nell'update dello stato:", error);
