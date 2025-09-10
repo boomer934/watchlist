@@ -11,6 +11,7 @@ export default function SearchBar({pageId=1}) {
     const {movieTitle,setMovieTitle} = useContext(MovieTitleContext)
     const navigate = useNavigate()
     const handleSubmit = () => {
+        if (!movieTitle) return
         const res = axios.get("https://api.themoviedb.org/3/search/movie", {
             params: {
                 api_key: "ae7e3d3ba153dd817538a94cd60ac92e",
