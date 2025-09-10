@@ -10,6 +10,7 @@ export default function Chat() {
     const [messages,setMessages] = useState([])
     const {userName,setUserName} = useContext(UserNameContext)
     const chatEnd = useRef(null)
+    const token = localStorage.getItem("token")
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -39,7 +40,7 @@ export default function Chat() {
 
   return (
     <>
-        {realTimeChat &&(
+        {realTimeChat && token && (
             <div className='absolute w-full h-full bg-black/25 flex justify-center items-start'>
                 <div className="fixed mt-[150px] sm:mt-[20px] sm:h-[350px] sm:w-[600px] z-[500] w-[300px] h-[500px] bg-white rounded-xl flex flex-col justify-end">
                     <div className=" flex flex-col overflow-y-scroll flex-1">
