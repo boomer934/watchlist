@@ -22,7 +22,7 @@ export default function Navbar(){
                 <div className="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="h-full flex justify-between items-center">
                     <div 
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/home/page/1")}
                     className="flex-shrink-0">
                         <h1 className="text-[21px] font-bold tracking-wide text-red-500 pr-1.5">WATCHLIST</h1>
                     </div>
